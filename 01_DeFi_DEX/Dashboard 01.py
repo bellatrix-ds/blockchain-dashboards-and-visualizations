@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[14]:
-
-
-with open("app.py", "w") as f:
-    f.write('''import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -26,10 +18,7 @@ fig, ax = plt.subplots()
 ax.bar(df["project"], df["volume_usd"])
 ax.set_ylabel("Volume (USD)")
 st.pyplot(fig)
-''')
 
-
-# In[ ]:
 
 
 

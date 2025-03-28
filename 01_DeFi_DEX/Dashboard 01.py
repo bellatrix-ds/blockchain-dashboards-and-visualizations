@@ -3,6 +3,23 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import streamlit as st
+from datetime import datetime, timedelta
+
+# Define the date range for the slider
+start_date = datetime(2022, 1, 1)
+end_date = datetime(2025, 3, 28)
+
+# Create the slider
+selected_start_date, selected_end_date = st.slider(
+    "Select a date range:",
+    min_value=start_date,
+    max_value=end_date,
+    value=(start_date, end_date),
+    format="MM/DD/YYYY"
+)
+
+st.write(f"Filtering data from {selected_start_date.strftime('%Y-%m-%d')} to {selected_end_date.strftime('%Y-%m-%d')}")
 
 # عنوان داشبورد
 st.title("📊 DEX Dashboard – DeFi Insights")

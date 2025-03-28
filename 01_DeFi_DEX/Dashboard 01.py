@@ -21,6 +21,25 @@ selected_start_date, selected_end_date = st.slider(
 
 st.write(f"Filtering data from {selected_start_date.strftime('%Y-%m-%d')} to {selected_end_date.strftime('%Y-%m-%d')}")
 
+
+import pandas as pd
+
+# Sample DataFrame
+data = pd.DataFrame({
+    "date": pd.date_range(start="2022-01-01", periods=1000, freq='D'),
+    "blockchain": ["Ethereum", "Bitcoin", "Binance Smart Chain"] * 333 + ["Cardano"],
+    "value": range(1000)
+})
+
+# Filter data based on selections
+filtered_data = data[
+    (data["date"] >= selected_start_date) &
+    (data["date"] <= selected_end_date) &
+    (data["blockchain"].isin(selected_blockchains))
+]
+
+st.write(filtered_data)
+
 # عنوان داشبورد
 st.title("📊 DEX Dashboard – DeFi Insights")
 

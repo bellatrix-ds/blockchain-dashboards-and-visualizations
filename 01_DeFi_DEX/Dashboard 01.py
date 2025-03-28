@@ -27,7 +27,6 @@ import pandas as pd
 # Sample DataFrame
 data = pd.DataFrame({
     "date": pd.date_range(start="2022-01-01", periods=1000, freq='D'),
-    "blockchain": ["Ethereum", "Bitcoin", "Binance Smart Chain"] * 333 + ["Cardano"],
     "value": range(1000)
 })
 

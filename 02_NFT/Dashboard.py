@@ -17,7 +17,8 @@ def load_data():
 
 df = load_data()
 
-df['BLOCK_TIMESTAMP'] = pd.to_datetime(df['BLOCK_TIMESTAMP'])
+df['BLOCK_TIMESTAMP'] = pd.to_datetime(df['BLOCK_TIMESTAMP'], errors='coerce')
+df = df.dropna(subset=['BLOCK_TIMESTAMP'])
 
 # Sidebar for date filter
 st.sidebar.title('Select Date Range')

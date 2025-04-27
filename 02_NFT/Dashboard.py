@@ -11,7 +11,7 @@ import streamlit as st
 # Load data from GitHub
 @st.cache_data
 def load_data():
-    url = 'https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO/main/YOUR_FILE.csv'
+    url = 'https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/02_NFT/part_2_collection_analysis.csv'
     df = pd.read_csv(url, parse_dates=['BLOCK_TIMESTAMP'])
     return df
 

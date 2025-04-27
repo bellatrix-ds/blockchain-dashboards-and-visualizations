@@ -16,7 +16,9 @@ def load_data():
     return df
 
 df = load_data()
+
 df['BLOCK_TIMESTAMP'] = pd.to_datetime(df['BLOCK_TIMESTAMP'])
+
 # Sidebar for date filter
 st.sidebar.title('Select Date Range')
 date_filter = st.sidebar.radio(

@@ -83,6 +83,30 @@ top_contracts = (
 st.dataframe(top_contracts, use_container_width=True)
 
 
+# Part 4_2
+
+df_contracts = pd.read_csv(
+    'https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/03_Wallet_Canvas/04_df_02.csv',
+    on_bad_lines='skip'
+)
+
+st.header("📄 Top Interacted Contracts")
+
+# Filter contracts for the selected wallet
+wallet_contracts = df_contracts[df_contracts['wallet'] == wallet.lower()]
+
+# Get top 10 contracts based on rank
+top_contracts = (
+    wallet_contracts
+    .sort_values(by='rnk')
+    .head(10)
+    [['contract', 'tx_count']]
+)
+
+# Show as a table
+st.dataframe(top_contracts, use_container_width=True)
+
+
 # ـــ
 st.markdown("---")
 st.caption("📧 Contact me: bellabahramii@gmail.com")

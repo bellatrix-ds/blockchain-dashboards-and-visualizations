@@ -5,7 +5,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-df = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/ml-in-crypto/refs/heads/main/04_Wallet_Canvas/df_final.csv',on_bad_lines='skip')
+df = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/03_Wallet_Canvas/01%2602_df.csv',on_bad_lines='skip')
 
 st.title("📊 ETH Wallet Insights & Patterns")
 
@@ -36,13 +36,12 @@ tx_activity_rate = round(wallet_data['total_tx'] / wallet_data['tx_count'] * 100
 st.write("📊 **Recent Activity Rate (Last 3mo vs All):**", f"{tx_activity_rate}%")
 
 # ______________________________________________________
-# part 3
+# Part 3
 import altair as alt
 
-filtered_df3 = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/ml-in-crypto/refs/heads/main/04_Wallet_Canvas/part3_data.csv')
+filtered_df3 = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/03_Wallet_Canvas/03_df.csv')
 st.header("📈 Wallet Activity Overview")
 
-# تبدیل ماه به نوع datetime برای نمودار دقیق‌تر
 # filtered_df3['month'] = pd.to_datetime(filtered_df3['month'])
 df_wallet = filtered_df3[filtered_df3['wallet_address'] == wallet]
 
@@ -67,7 +66,7 @@ st.altair_chart(balance_chart, use_container_width=True)
 
 # 📜 Top Contract Interactions
 
-df_contracts = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/ml-in-crypto/refs/heads/main/04_Wallet_Canvas/df4_b_data.csv',on_bad_lines='skip')
+df_contracts = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/03_Wallet_Canvas/04_df_01.csv',on_bad_lines='skip')
 
 st.header("📜 Top Contract Interactions")
 

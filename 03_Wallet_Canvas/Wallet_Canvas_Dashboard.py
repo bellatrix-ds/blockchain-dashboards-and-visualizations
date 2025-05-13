@@ -71,21 +71,16 @@ df_contracts = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/block
 st.header("📜 Top Contract Interactions")
 
 wallet_contracts = df_contracts[df_contracts['wallet'] == wallet.lower()]
-
+# Get top 10 by tx_count
 top_contracts = (
     wallet_contracts
     .sort_values(by='tx_count', ascending=False)
     .head(10)
-    .copy()
+    [['counterparty', 'tx_count']]
 )
 
-if 'contract_name' in top_contracts.columns:
-    top_contracts = top_contracts[['contract', 'contract_name', 'tx_count']]
-else:
-    top_contracts = top_contracts[['contract', 'tx_count']]
-
+# Display two-column table
 st.dataframe(top_contracts, use_container_width=True)
-
 
 
 # ـــ

@@ -68,7 +68,7 @@ st.altair_chart(balance_chart, use_container_width=True)
 
 df_contracts = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/03_Wallet_Canvas/04_df_01.csv',on_bad_lines='skip')
 
-st.header("📜 Top Contract Interactions")
+st.header("🧑‍💻 Most Frequent Tx Targets (Mixed)")
 
 wallet_contracts = df_contracts[df_contracts['wallet'] == wallet.lower()]
 # Get top 10 by tx_count

@@ -47,6 +47,7 @@ st.write("")  # small spacer
 
 # ---------- Category chips ----------
 categories = [
+    "Chains & Ecosystems",
     "Coins & tokens",
     "DeFi protocols",
     "Memecoins",

@@ -52,7 +52,9 @@ categories = [
     "Memecoins",
     "NFTs & collectibles",
     "Airdrops & farming",
-    "Hacks & regulation",
+    "Rules & taxes",
+    "Apps & wallets",
+    "People & Influencers"
 ]
 
 # remember last clicked category

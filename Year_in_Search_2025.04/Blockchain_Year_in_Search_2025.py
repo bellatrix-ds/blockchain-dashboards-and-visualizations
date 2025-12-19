@@ -2,18 +2,50 @@
 
 import streamlit as st
 
-# Basic page config
+# ---------- Page config ----------
 st.set_page_config(
     page_title="Blockchain Year in Search 2025",
-    page_icon="📊",
+    page_icon="🎄",
     layout="wide",
 )
 
-# --- Title ---
+# ---------- Global styles ----------
+st.markdown(
+    """
+    <style>
+    /* Center content a bit */
+    main .block-container {
+        max-width: 900px;
+        padding-top: 2rem;
+    }
+
+    /* Pill-style buttons */
+    .stButton > button {
+        border-radius: 999px;
+        background-color: #e9f0ff;
+        color: #2157d5;
+        border: none;
+        padding: 0.35rem 1.1rem;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .stButton > button:hover {
+        background-color: #d7e3ff;
+        color: #1742a3;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# ---------- Header ----------
 st.title("Blockchain Year in Search 2025")
 st.caption("Explore what people searched for in crypto and blockchain throughout the year.")
 
-# --- Category chips ---
+st.write("")  # small spacer
+
+# ---------- Category chips ----------
 categories = [
     "Coins & tokens",
     "DeFi protocols",
@@ -23,21 +55,24 @@ categories = [
     "Hacks & regulation",
 ]
 
-# Use a horizontal radio as pill-style quick-access buttons
-selected_category = st.radio(
-    "Choose a category",
-    categories,
-    horizontal=True,
-    label_visibility="collapsed",
-)
+# remember last clicked category
+if "selected_category" not in st.session_state:
+    st.session_state.selected_category = categories[0]
+
+cols = st.columns(len(categories))
+
+for col, cat in zip(cols, categories):
+    with col:
+        if st.button(cat, key=f"btn_{cat}"):
+            st.session_state.selected_category = cat
 
 st.divider()
 
-# --- Placeholder content area (to be expanded later) ---
-st.subheader(selected_category)
-
+# ---------- Placeholder content ----------
+selected = st.session_state.selected_category
+st.subheader(selected)
 st.info(
-    f"This is a placeholder section for **{selected_category}**.\n\n"
-    "Later you can add charts, tables, and insights about the top searches, "
-    "trending topics, and notable events for this category in 2025."
+    f"This is a placeholder area for **{selected}**.\n\n"
+    "Later you can add charts, tables, and insights about the top searches "
+    "and trends for this category in 2025."
 )

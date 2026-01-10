@@ -11,62 +11,64 @@ df = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dash
 # Filter data for date > 2025
 df = df[df['date'] > '2025-12-31']
 
-# -----------------------------
-# Streamlit UI
-# -----------------------------
-st.set_page_config(page_title="Defi Lending Protocol Dashboard", layout="wide")
-st.title("📊 Defi Lending Protocol Dashboard")
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
 
-# --------- Box
-st.markdown("### 👤 about dashboard")
-with st.expander("lending dashboard"):
-    st.write("""
-Visualize Total Value Locked (TVL) across chains after **2025**
-    """)
+# Assuming df_chain_tvls is already loaded and preprocessed
+df = df_chain_tvls.copy()
+df['date'] = pd.to_datetime(df['date'])
 
-# --------
-st.markdown("")
+st.title("📊 DeFi Lending Protocol Dashboard")
+st.markdown("Visualize Total Value Locked (TVL) across chains after **2025**")
 
-# Sidebar filters
-with st.sidebar:
-    st.header("🔍 Filters")
+# ✅ Always-visible About Box (not collapsible)
+st.markdown("### 🧑‍💻 About This Dashboard")
+st.markdown("""
+This dashboard visualizes the Total Value Locked (TVL) of AAVE lending protocol 
+across multiple blockchains starting from 2025.  
+You can filter by chain and select a time period (last 3, 6, or 12 months).
+""")
 
-    chains = df['chain'].unique()
-    selected_chains = st.multiselect("Select Chain(s):", chains, default=chains[:1])
+# =============================
+# 🔍 Sidebar Filters
+# =============================
+st.sidebar.header("🔍 Filters")
 
-    df['date'] = pd.to_datetime(df['date'])
-    max_date = df['date'].max()
-    last_3_months = max_date - pd.DateOffset(months=3)
-    last_6_months = max_date - pd.DateOffset(months=6)
-    last_12_months = max_date - pd.DateOffset(months=12)
+# Chain Filter
+selected_chains = st.sidebar.multiselect(
+    "Select Chain(s):",
+    df['chain'].unique(),
+    default=df['chain'].unique()
+)
 
-date_filter = st.selectbox("⏳ TimeFrame ", ["Last 3 Months", "Last 6 Months", "Last 12 Months"])
+# Time Range Filter
+st.sidebar.subheader("⏳ Time Range")
+time_range_option = st.sidebar.selectbox(
+    "Select Time Period:",
+    ["Last 3 Months", "Last 6 Months", "Last 12 Months"]
+)
 
-if date_filter == "Last 3 Months":
-    df = df[df['date'] >= last_3_months]
-elif date_filter == "Last 6 Months":
-    df = df[df['date'] >= last_6_months]
-elif date_filter == "Last 12 Months":
-    df = df[df['date'] >= last_12_months]
+# Apply Time Range Filter
+latest_date = df['date'].max()
+if time_range_option == "Last 3 Months":
+    start_date = latest_date - pd.DateOffset(months=3)
+elif time_range_option == "Last 6 Months":
+    start_date = latest_date - pd.DateOffset(months=6)
+else:
+    start_date = latest_date - pd.DateOffset(months=12)
 
-    
-# Apply filters
-filtered_df = df[
-    (df['chain'].isin(selected_chains)) &
-    (df['month'].isin(selected_months))
-]
+df = df[(df['date'] >= start_date) & (df['chain'].isin(selected_chains))]
 
-# -----------------------------
-# Line chart
-# -----------------------------
-
-if not filtered_df.empty:
-    st.markdown("### 📉 TVL Over Time")
+# =============================
+# 📈 Line Chart
+# =============================
+if not df.empty:
+    st.subheader("📈 TVL Over Time")
 
     fig, ax = plt.subplots(figsize=(12, 6))
-
     for chain in selected_chains:
-        chain_data = filtered_df[filtered_df['chain'] == chain].sort_values("date")
+        chain_data = df[df['chain'] == chain].sort_values("date")
         ax.plot(chain_data['date'], chain_data['totalLiquidityUSD'], label=chain)
         ax.fill_between(chain_data['date'], chain_data['totalLiquidityUSD'], alpha=0.4)
 

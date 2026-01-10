@@ -80,7 +80,3 @@ if not df_filtered.empty:
 else:
     st.warning("No data available for the selected filters.")
 
-
-    st.pyplot(fig)
-else:
-    st.warning("No data available for the selected filters.")

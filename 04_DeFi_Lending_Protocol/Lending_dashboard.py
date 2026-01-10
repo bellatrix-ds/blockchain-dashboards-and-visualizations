@@ -14,7 +14,22 @@ df = pd.read_csv(
 df['date'] = pd.to_datetime(df['date'])
 
 # Keep data after 2025
-df = df[df['date'] >= '2026-01-01']
+df = df[df['date'] >= '2025-01-01']
+
+# -----------------------------
+# Title & Description
+# -----------------------------
+st.title("📊 DeFi Lending Protocol Dashboard")
+st.markdown("Visualize Total Value Locked (TVL) across chains after **2025**")
+
+st.markdown("### 🧑‍💻 About This Dashboard")
+st.markdown("""
+This dashboard visualizes the metrics of lending protocol 
+across multiple blockchains starting from 2025.  
+You can filter by chain and select a time period (last 3, 6, or 12 months).
+""")
+
+
 
 # -----------------------------
 # Sidebar Filters

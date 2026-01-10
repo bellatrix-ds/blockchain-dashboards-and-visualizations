@@ -51,38 +51,35 @@ selected_chain = st.sidebar.selectbox("Choose a chain:", chain_options)
 # 📈 Line Chart
 # =============================
 
-
-# Filter df based on selected_chain and selected_timeframe
-df_filtered = df.copy()
-
-# Filter by time
-if time_range == "Last 3 Months":
-    cutoff = df_filtered['date'].max() - pd.DateOffset(months=3)
-elif time_range == "Last 6 Months":
-    cutoff = df_filtered['date'].max() - pd.DateOffset(months=6)
-else:  # Last 12 Months
-    cutoff = df_filtered['date'].max() - pd.DateOffset(months=12)
-
-df_filtered = df_filtered[df_filtered['date'] >= cutoff]
-
-# Filter by chain
-if selected_chain != "All":
-    df_filtered = df_filtered[df_filtered['chain'] == selected_chain]
-
-# Plot the chart
-st.markdown("### 📉 TVL Over Time")
+import matplotlib.ticker as mtick
+import matplotlib.dates as mdates
 
 if not df_filtered.empty:
     fig, ax = plt.subplots(figsize=(12, 6))
+
+    # Plot each chain separately
     for chain in df_filtered['chain'].unique():
         chain_data = df_filtered[df_filtered['chain'] == chain]
         ax.plot(chain_data['date'], chain_data['totalLiquidityUSD'], label=chain)
 
+    # Format x-axis as month names
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b'))
+    ax.xaxis.set_major_locator(mdates.MonthLocator())
+
+    # Format y-axis to show billions with $ sign
+    ax.yaxis.set_major_formatter(mtick.FuncFormatter(lambda x, _: f'${x/1e9:.0f}B'))
+
     ax.set_xlabel("Date")
     ax.set_ylabel("TVL (USD)")
     ax.set_title("Total Liquidity Over Time")
-    ax.legend()
-    ax.grid(True)
+
+    # Move legend to the right, smaller font
+    ax.legend(loc='center left', bbox_to_anchor=(1.02, 0.5), fontsize='small')
+
+    st.pyplot(fig)
+else:
+    st.warning("No data available for the selected filters.")
+
 
     st.pyplot(fig)
 else:

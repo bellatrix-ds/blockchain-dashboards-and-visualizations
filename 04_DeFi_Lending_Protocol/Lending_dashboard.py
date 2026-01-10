@@ -29,30 +29,27 @@ You can filter by chain and select a time period (last 3, 6, or 12 months).
 # =============================
 st.sidebar.header("🔍 Filters")
 
-# Chain Filter
-selected_chains = st.sidebar.multiselect(
-    "Select Chain(s):",
-    df['chain'].unique(),
-    default=df['chain'].unique()
-)
-
-# Time Range Filter
+# Time Range (unchanged)
 st.sidebar.subheader("⏳ Time Range")
 time_range_option = st.sidebar.selectbox(
     "Select Time Period:",
     ["Last 3 Months", "Last 6 Months", "Last 12 Months"]
 )
 
-# Apply Time Range Filter
-latest_date = df['date'].max()
-if time_range_option == "Last 3 Months":
-    start_date = latest_date - pd.DateOffset(months=3)
-elif time_range_option == "Last 6 Months":
-    start_date = latest_date - pd.DateOffset(months=6)
-else:
-    start_date = latest_date - pd.DateOffset(months=12)
+# Clean Chain Selector (compact style with all selected by default)
+st.sidebar.subheader("🔗 Chain")
+all_chains = df['chain'].unique().tolist()
+selected_chains = st.sidebar.selectbox(
+    "Choose a chain:",
+    options=["All"] + all_chains,
+    index=0
+)
 
-df = df[(df['date'] >= start_date) & (df['chain'].isin(selected_chains))]
+# Apply filter logic
+if selected_chains == "All":
+    filtered_df = df.copy()
+else:
+    filtered_df = df[df["chain"] == selected_chains]
 
 # =============================
 # 📈 Line Chart

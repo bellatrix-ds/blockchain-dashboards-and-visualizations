@@ -50,20 +50,26 @@ selected_chain = st.sidebar.selectbox("Choose a chain:", chain_options)
 # =============================
 # 📈 Line Chart
 # =============================
-if not df.empty:
+
+if not filtered_df.empty:
     st.subheader("📈 TVL Over Time")
+    chart_data = filtered_df.sort_values("date")
+
+    # Handle single or all chains
+    chains_to_plot = chart_data['chain'].unique() if selected_chain == "All" else [selected_chain]
 
     fig, ax = plt.subplots(figsize=(12, 6))
-    for chain in selected_chains:
-        chain_data = df[df['chain'] == chain].sort_values("date")
+    for chain in chains_to_plot:
+        chain_data = chart_data[chart_data['chain'] == chain]
         ax.plot(chain_data['date'], chain_data['totalLiquidityUSD'], label=chain)
-        ax.fill_between(chain_data['date'], chain_data['totalLiquidityUSD'], alpha=0.4)
 
     ax.set_xlabel("Date")
     ax.set_ylabel("TVL (USD)")
     ax.set_title("Total Liquidity Over Time")
     ax.legend()
-    ax.grid(alpha=0.3)
+    ax.grid(True)
+
     st.pyplot(fig)
+
 else:
     st.warning("No data available for the selected filters.")

@@ -25,6 +25,7 @@ with st.sidebar:
     chains = df['chain'].unique()
     selected_chains = st.multiselect("Select Chain(s):", chains, default=chains[:1])
 
+    df['date'] = pd.to_datetime(df['date'])
     df['month'] = df['date'].dt.to_period('M').astype(str)
     months = df['month'].unique()
     selected_months = st.multiselect("Select Month(s):", months, default=months[-3:])

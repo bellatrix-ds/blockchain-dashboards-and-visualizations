@@ -51,25 +51,19 @@ selected_chain = st.sidebar.selectbox("Choose a chain:", chain_options)
 # 📈 Line Chart
 # =============================
 
-if not filtered_df.empty:
-    st.subheader("📈 TVL Over Time")
-    chart_data = filtered_df.sort_values("date")
+# Filter df based on selected_chain and selected_timeframe
+df_filtered = df.copy()
 
-    # Handle single or all chains
-    chains_to_plot = chart_data['chain'].unique() if selected_chain == "All" else [selected_chain]
+# Filter by time
+if selected_timeframe == "Last 3 Months":
+    cutoff = df_filtered['date'].max() - pd.DateOffset(months=3)
+elif selected_timeframe == "Last 6 Months":
+    cutoff = df_filtered['date'].max() - pd.DateOffset(months=6)
+else:  # Last 12 Months
+    cutoff = df_filtered['date'].max() - pd.DateOffset(months=12)
 
-    fig, ax = plt.subplots(figsize=(12, 6))
-    for chain in chains_to_plot:
-        chain_data = chart_data[chart_data['chain'] == chain]
-        ax.plot(chain_data['date'], chain_data['totalLiquidityUSD'], label=chain)
+df_filtered = df_filtered[df_filtered['date'] >= cutoff]
 
-    ax.set_xlabel("Date")
-    ax.set_ylabel("TVL (USD)")
-    ax.set_title("Total Liquidity Over Time")
-    ax.legend()
-    ax.grid(True)
-
-    st.pyplot(fig)
-
-else:
-    st.warning("No data available for the selected filters.")
+# Filter by chain
+if selected_chain != "All":
+    df_filtered = df_filtered[df_filtered['chain'] == selected_chain]

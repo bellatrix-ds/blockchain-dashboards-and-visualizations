@@ -3,6 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.ticker as mtick
+import plotly.express as px
 
 # -----------------------------
 # Load Data
@@ -72,7 +73,7 @@ if selected_chain != "All":
 # Plot
 # -----------------------------
 
-import plotly.express as px
+
 
 st.subheader("📈 TVL Over Time")
 

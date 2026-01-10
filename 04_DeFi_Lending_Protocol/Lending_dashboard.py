@@ -14,9 +14,18 @@ df = df[df['date'] > '2025-12-31']
 # -----------------------------
 # Streamlit UI
 # -----------------------------
-st.set_page_config(page_title="AAVE TVL Dashboard", layout="wide")
-st.title("📊 AAVE Lending Protocol - TVL Dashboard")
-st.markdown("Visualize Total Value Locked (TVL) across chains after **2025**")
+st.set_page_config(page_title="Defi Lending Protocol Dashboard", layout="wide")
+st.title("📊 Defi Lending Protocol Dashboard")
+
+# --------- Box
+st.markdown("### 👤 about dashboard")
+with st.expander("lending dashboard"):
+    st.write("""
+Visualize Total Value Locked (TVL) across chains after **2025**
+    """)
+
+# --------
+st.markdown("")
 
 # Sidebar filters
 with st.sidebar:
@@ -26,10 +35,21 @@ with st.sidebar:
     selected_chains = st.multiselect("Select Chain(s):", chains, default=chains[:1])
 
     df['date'] = pd.to_datetime(df['date'])
-    df['month'] = df['date'].dt.to_period('M').astype(str)
-    months = df['month'].unique()
-    selected_months = st.multiselect("Select Month(s):", months, default=months[-3:])
+    max_date = df['date'].max()
+    last_3_months = max_date - pd.DateOffset(months=3)
+    last_6_months = max_date - pd.DateOffset(months=6)
+    last_12_months = max_date - pd.DateOffset(months=12)
 
+date_filter = st.selectbox("⏳ TimeFrame ", ["Last 3 Months", "Last 6 Months", "Last 12 Months"])
+
+if date_filter == "Last 3 Months":
+    df = df[df['date'] >= last_3_months]
+elif date_filter == "Last 6 Months":
+    df = df[df['date'] >= last_6_months]
+elif date_filter == "Last 12 Months":
+    df = df[df['date'] >= last_12_months]
+
+    
 # Apply filters
 filtered_df = df[
     (df['chain'].isin(selected_chains)) &
@@ -39,21 +59,22 @@ filtered_df = df[
 # -----------------------------
 # Line chart
 # -----------------------------
+
 if not filtered_df.empty:
-    st.subheader("📈 TVL Over Time")
-    chart_data = filtered_df.sort_values("date")
+    st.markdown("### 📉 TVL Over Time")
 
     fig, ax = plt.subplots(figsize=(12, 6))
+
     for chain in selected_chains:
-        chain_data = chart_data[chart_data['chain'] == chain]
+        chain_data = filtered_df[filtered_df['chain'] == chain].sort_values("date")
         ax.plot(chain_data['date'], chain_data['totalLiquidityUSD'], label=chain)
+        ax.fill_between(chain_data['date'], chain_data['totalLiquidityUSD'], alpha=0.4)
 
     ax.set_xlabel("Date")
     ax.set_ylabel("TVL (USD)")
     ax.set_title("Total Liquidity Over Time")
     ax.legend()
-    ax.grid(True)
-
+    ax.grid(alpha=0.3)
     st.pyplot(fig)
 else:
     st.warning("No data available for the selected filters.")

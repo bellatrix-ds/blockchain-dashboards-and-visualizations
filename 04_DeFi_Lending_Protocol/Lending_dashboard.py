@@ -71,43 +71,37 @@ if selected_chain != "All":
 # -----------------------------
 # Plot
 # -----------------------------
+
+import plotly.express as px
+
 st.subheader("📈 TVL Over Time")
 
 if df_filtered.empty:
     st.warning("No data available for the selected filters.")
 else:
-    fig, ax = plt.subplots(figsize=(12, 6))
-
-    for chain in df_filtered['chain'].unique():
-        chain_data = df_filtered[df_filtered['chain'] == chain]
-        ax.plot(
-            chain_data['date'],
-            chain_data['totalLiquidityUSD'],
-            label=chain,
-            linewidth=2
-        )
-
-    # X axis → month names
-    ax.xaxis.set_major_locator(mdates.MonthLocator())
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b'))
-
-    # Y axis → $ billions
-    ax.yaxis.set_major_formatter(
-        mtick.FuncFormatter(lambda x, _: f'${x/1e9:.0f}B')
+    fig = px.line(
+        df_filtered,
+        x="date",
+        y="totalLiquidityUSD",
+        color="chain",
+        labels={
+            "date": "Date",
+            "totalLiquidityUSD": "TVL (USD)",
+            "chain": "Chain"
+        },
+        hover_data={
+            "totalLiquidityUSD": ":.3s",  # e.g., 3.25B
+            "chain": True,
+            "date": False  # already shown
+        }
     )
 
-    ax.set_xlabel("")
-    ax.set_ylabel("TVL (USD)")
-    ax.set_title("Total Value Locked Over Time")
-
-    # Legend outside chart
-    ax.legend(
-        loc='center left',
-        bbox_to_anchor=(1.02, 0.5),
-        fontsize='small',
-        frameon=False
+    # Format y-axis (e.g., $5B)
+    fig.update_layout(
+        yaxis_tickformat="$~s",
+        hovermode="x unified",
+        showlegend=False,  # 🔥 hide legend
+        margin=dict(t=50, r=20, l=10, b=40)
     )
 
-    ax.grid(False)
-    plt.tight_layout()
-    st.pyplot(fig)
+    st.plotly_chart(fig, use_container_width=True)

@@ -11,12 +11,6 @@ df = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dash
 # Filter data for date > 2025
 df = df[df['date'] > '2025-12-31']
 
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# Assuming df_chain_tvls is already loaded and preprocessed
-df = df_chain_tvls.copy()
 df['date'] = pd.to_datetime(df['date'])
 
 st.title("📊 DeFi Lending Protocol Dashboard")

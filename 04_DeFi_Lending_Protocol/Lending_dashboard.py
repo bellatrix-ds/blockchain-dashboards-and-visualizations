@@ -48,6 +48,7 @@ if selected_chain != "All":
 # -----------------------------
 # About Me
 # -----------------------------
+
 with st.sidebar:
     st.markdown("---")
     with st.sidebar:
@@ -58,7 +59,7 @@ with st.sidebar:
 
     
     # st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=110)  
-    st.markdown("**My Name Is Bella**")
+st.markdown("**My Name Is Bella**")
     st.caption("🧬 Blockchain Research Analyst")
 
     st.markdown("**Get in touch: 👇🏼**")

@@ -171,8 +171,9 @@ with col1:
 )
     fig.update_yaxes(
     type="log",
-    tickvals= [2e7, 1e8, 5e8, 2e9, 5e10], 
-    ticktext= ["$20M", "$100M", "$500M", "$2B", "$50B"]
+        tickvals=[2e7, 5e7, 1e8, 2e8, 3e8, 4e8, 5e8, 1e9, 2e9, 5e9, 1e10, 2e10, 4e10,5e10],
+        ticktext=["$20M", "$50M", "$100M", "$200M", "$300M", "$400M" , "$500M",
+              "$1B", "$2B", "$5B", "$10B", "$20B","$40B" , "$50B"]
 )
     fig.update_layout(
     hovermode="x unified",

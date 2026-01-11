@@ -84,7 +84,7 @@ if selected_chain != "All":
 # -----------------------------
 # Layout with Two Columns
 # -----------------------------
-st.subheader("📈 Protocol TVL Overview")
+st.subheader("📈 ----------- Protocol TVL Overview -----------")
 col1, col2 = st.columns(2)
 
 # --- Left Chart: TVL over time ---

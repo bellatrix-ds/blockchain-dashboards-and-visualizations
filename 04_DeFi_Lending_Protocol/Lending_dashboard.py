@@ -171,3 +171,138 @@ with col2:
     )
 
     st.plotly_chart(fig_bar, use_container_width=True)
+
+
+
+
+import pandas as pd
+import streamlit as st
+import plotly.express as px
+
+# ===== Load Dataframes =====
+df_tvl = df_all_final  # historical TVL data
+df_yield = df_yield_final  # token-level TVL + APY
+
+# ================= Page Config
+st.set_page_config(layout="wide")
+
+# ===== Header & Description =====
+st.title("📊 DeFi Lending Market Dashboard")
+
+st.markdown(
+    """
+    This dashboard shows lending market metrics across multiple protocols and blockchains.
+    You can filter data by chain and time period, and explore TVL & yield statistics.
+    """
+)
+
+# ===== Sidebar Filters =====
+st.sidebar.header("🔍 Filters")
+
+# Time Range
+time_range = st.sidebar.selectbox(
+    "Select Time Period:",
+    ["Last 3 Months", "Last 6 Months", "Last 12 Months"],
+    index=2
+)
+
+# Chain Filter
+chain_options = ["All"] + sorted(df_tvl["chain"].unique())
+selected_chain = st.sidebar.selectbox("Choose a chain:", chain_options)
+
+# ===== Filter TVL Based on Sidebar =====
+df_tvl_filtered = df_tvl.copy()
+
+months_map = {"Last 3 Months": 3, "Last 6 Months": 6, "Last 12 Months": 12}
+cutoff = df_tvl_filtered['date'].max() - pd.DateOffset(months=months_map[time_range])
+df_tvl_filtered = df_tvl_filtered[df_tvl_filtered['date'] >= cutoff]
+
+if selected_chain != "All":
+    df_tvl_filtered = df_tvl_filtered[df_tvl_filtered['chain'] == selected_chain]
+
+# ===== Section 1: Key Metrics =====
+st.subheader("📊 Key Lending Metrics")
+
+col1, col2, col3, col4 = st.columns(4)
+
+# Latest TVL total across all
+latest_data = df_tvl_filtered[df_tvl_filtered['date'] == df_tvl_filtered['date'].max()]
+total_tvl = latest_data['totalLiquidityUSD'].sum()
+
+col1.metric("🏦 Total TVL", f"${total_tvl/1e9:.2f} B")
+
+# Protocol-specific TVL
+protocol_tvls = latest_data.groupby("protocol")["totalLiquidityUSD"].sum().reset_index()
+
+for idx, row in protocol_tvls.iterrows():
+    value = row["totalLiquidityUSD"]
+    col = col2 if idx == 0 else col3 if idx == 1 else col4
+    col.metric(f"{row['protocol']} TVL", f"${value/1e9:.2f} B")
+
+# ===== Section 2: TVL Trend Over Time =====
+st.subheader("📈 TVL Trend Over Time")
+
+if not df_tvl_filtered.empty:
+    fig_trend = px.line(
+        df_tvl_filtered,
+        x="date",
+        y="totalLiquidityUSD",
+        color="protocol",
+        labels={"date": "Date", "totalLiquidityUSD": "TVL (USD)"},
+        hover_data={"totalLiquidityUSD": ":,.0f"},
+        title="TVL Over Time by Protocol"
+    )
+    fig_trend.update_layout(yaxis_tickformat="$~s", legend_title="Protocol")
+    st.plotly_chart(fig_trend, use_container_width=True)
+else:
+    st.warning("No TVL data to show.")
+
+# ===== Section 3: TVL Distribution by Token =====
+st.subheader("📦 TVL Distribution by Token")
+
+df_tokens_grouped = df_yield.groupby(["symbol", "project"], as_index=False)["tvlUsd"].sum()
+
+# Rename protocols for better display
+protocol_map = {
+    "aave-v3": "Aave",
+    "compound-v3": "Compound",
+    "morpho-v1": "Morpho",
+    "sparklend": "SparkLend"
+}
+df_tokens_grouped["project"] = df_tokens_grouped["project"].replace(protocol_map)
+
+color_map = {
+    "Aave": "#9391f7",
+    "Compound": "#38cfa0",
+    "Morpho": "#3277fe",
+    "SparkLend": "#e55314"
+}
+
+fig_tokens = px.bar(
+    df_tokens_grouped,
+    x="symbol",
+    y="tvlUsd",
+    color="project",
+    color_discrete_map=color_map,
+    labels={"symbol": "Token", "tvlUsd": "TVL (USD)", "project": "Protocol"},
+    title="TVL Distribution by Token"
+)
+fig_tokens.update_layout(
+    yaxis_tickformat="$~s",
+    xaxis_tickangle=-45,
+    barmode="stack",
+    title_x=0.5
+)
+st.plotly_chart(fig_tokens, use_container_width=True)
+
+# ===== Section 4: Yield Table =====
+st.subheader("📋 Yield Stats (APY) by Token")
+
+df_yield_display = df_yield.copy()
+df_yield_display["project"] = df_yield_display["project"].replace(protocol_map)
+
+st.dataframe(
+    df_yield_display[
+        ["project", "chain", "symbol", "tvlUsd", "apy", "apyMean30d"]
+    ].sort_values(by="tvlUsd", ascending=False)
+)

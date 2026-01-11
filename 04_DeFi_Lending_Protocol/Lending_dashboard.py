@@ -21,7 +21,7 @@ df = df[df['date'] >= '2025-01-01']
 # Title & Description
 # -----------------------------
 st.title("📊 DeFi Lending Protocol Dashboard")
-st.markdown("Visualize Total Value Locked (TVL) across chains after **2025**")
+
 
 st.markdown("### 🧑‍💻 About This Dashboard")
 st.markdown("""

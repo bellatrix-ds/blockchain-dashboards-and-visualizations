@@ -62,7 +62,7 @@ if selected_chain != "All":
 # -----------------------------
 
 st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 50px;">📊 Lending TVL KPIs</h4>
+<h4 style="text-align: center; color: white; margin-top: 30px;">📊 Lending TVL KPIs</h4>
 <hr style="border: none; height: 0; margin: 0; padding: 0;">
 """, unsafe_allow_html=True)
 

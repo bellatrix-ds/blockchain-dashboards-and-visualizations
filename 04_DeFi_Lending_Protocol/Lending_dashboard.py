@@ -187,8 +187,41 @@ with col1:
 
 
 
-# --- Right Chart: TVL by Token ---
+# --- Right Chart: TVL by Chain (stacked by protocol) ---
+
 with col2:
+    bar_df = df_filtered.copy()
+    bar_df["chain"] = bar_df["chain"].astype(str).str.strip()
+    bar_df["protocol"] = bar_df["protocol"].astype(str).str.strip()
+
+    # keep TVL only + respect filters (df_filtered already filtered)
+    bar_df = bar_df[bar_df["metric_type"] == "tvl"]
+
+    # total TVL per chain for each protocol over the selected time range
+    bar_df = (
+        bar_df.groupby(["chain", "protocol"], as_index=False)["totalLiquidityUSD"]
+        .sum()
+        .sort_values(["totalLiquidityUSD"], ascending=False)
+    )
+
+    fig_bar = px.bar(
+        bar_df,
+        x="chain",
+        y="totalLiquidityUSD",
+        color="protocol",
+        barmode="stack",
+        title="Total TVL by Chain (Stacked by Protocol)",
+        labels={"chain": "Chain", "totalLiquidityUSD": "Total TVL (USD)", "protocol": "Protocol"},
+        hover_data={"totalLiquidityUSD": ":.3s"}
+    )
+
+    fig_bar.update_layout(
+        yaxis_tickformat="$~s",
+        hovermode="x unified",
+        margin=dict(t=50, r=20, l=10, b=40)
+    )
+
+    st.plotly_chart(fig_bar, use_container_width=True)
   
 
 # --------------

@@ -60,7 +60,12 @@ with st.sidebar:
     with c2:
         st.link_button("GitHub", "https://github.com/bellatrix-ds")
 
-    st.link_button("x.com", "https://x.com/Bella52496")
+    c1, c2 = st.columns(2)
+    with c1:
+        st.link_button("x.com", "https://x.com/Bella52496")
+    with c2:
+        st.link_button("Email", "mailto:bellabahramii@gmail.com")
+
     st.markdown("---")
 
 

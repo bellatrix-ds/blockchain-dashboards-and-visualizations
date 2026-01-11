@@ -84,7 +84,16 @@ if selected_chain != "All":
 # -----------------------------
 # Layout with Two Columns
 # -----------------------------
-st.subheader("📈 ----------- Protocol TVL Overview -----------")
+
+st.markdown("""
+<hr style="border: none; border-top: 1px solid white; margin-top: 20px;">
+<h4 style="text-align: center; color: white;">💰 Protocol TVL Overview</h4>
+<hr style="border: none; border-top: 1px solid white; margin-bottom: 20px;">
+""", unsafe_allow_html=True)
+
+
+
+st.subheader("Protocol TVL Overview")
 col1, col2 = st.columns(2)
 
 # --- Left Chart: TVL over time ---

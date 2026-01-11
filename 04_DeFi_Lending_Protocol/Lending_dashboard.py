@@ -171,7 +171,7 @@ with col1:
 )
     fig.update_yaxes(
     type="log",
-    tickvals= [2e7, 1e8, 5e8, 2e9, 5e10], ,
+    tickvals= [2e7, 1e8, 5e8, 2e9, 5e10], 
     ticktext= ["$20M", "$100M", "$500M", "$2B", "$50B"]
 )
     fig.update_layout(

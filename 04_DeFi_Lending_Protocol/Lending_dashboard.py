@@ -134,7 +134,7 @@ st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
 
 st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 20px;">💰 Protocol TVL Overview</h4>
+<h4 style="text-align: center; color: white; margin-top: 60px;">💰 Protocol TVL Overview</h4>
 <hr style="border-top: 1px solid gray; margin-top: 4px;">
 """, unsafe_allow_html=True)
 

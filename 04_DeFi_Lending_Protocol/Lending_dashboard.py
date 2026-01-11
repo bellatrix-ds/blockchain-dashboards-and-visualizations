@@ -58,7 +58,14 @@ if selected_chain != "All":
 # -----------------------------
 # KPI Section
 # -----------------------------
-st.subheader("##📊 Lending TVL KPIs")
+
+st.markdown("""
+<h4 style="text-align: center; color: white; margin-top: 30px;">📊 Lending TVL KPIs</h4>
+<hr style="border-top: 1px solid gray; margin-top: 4px;">
+""", unsafe_allow_html=True)
+
+
+
 
 # ---- KPI values ----
 kpi_df = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()

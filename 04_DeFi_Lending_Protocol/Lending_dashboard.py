@@ -58,9 +58,10 @@ if selected_chain != "All":
 # -----------------------------
 # KPI Section
 # -----------------------------
+
 st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 20px;">📊 Lending TVL KPIs</h4>
-<hr style="border-top: 1px solid gray; margin-top: 4px;">
+<hr style="border-top: 1px solid gray; margin-bottom: 8px;">
+<h4 style="text-align: center; color: white; margin: 0;">📊 Lending TVL KPIs</h4>
 """, unsafe_allow_html=True)
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)

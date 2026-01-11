@@ -28,7 +28,7 @@ st.title("📊 DeFi Lending Protocol Dashboard")
 with st.container():
     st.markdown(
     """
-    <div style='background-color: white; padding: 20px; border-radius: 12px;'>
+    <div style='background-color: gray; padding: 20px; border-radius: 12px;'>
         <p style='color: black; font-size: 16px;'>
         This dashboard visualizes the metrics of lending protocol across multiple blockchains starting from 2025.<br>
         You can filter by chain and select a time period (last 3, 6, or 12 months).

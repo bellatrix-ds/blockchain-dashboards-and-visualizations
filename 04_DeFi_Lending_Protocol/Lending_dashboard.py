@@ -103,43 +103,53 @@ with col1:
 
 # --- Right Chart: Bar chart by token ---
 with col2:
-    df_yield_grouped = df_yield.groupby(["symbol", "project"])["tvlUsd"].sum().reset_index()
+    # 1. Group data
+    df_yield_grouped = (
+        df_yield
+        .groupby(["symbol", "project"], as_index=False)["tvlUsd"]
+        .sum()
+    )
+
+    # 2. Rename protocol names (for display + legend)
     rename_map = {
         "aave-v3": "Aave",
         "compound-v3": "Compound",
         "morpho-v1": "Morpho",
         "sparklend": "SparkLend"
-        }
+    }
 
     df_yield_grouped["project"] = df_yield_grouped["project"].replace(rename_map)
 
-    
+    # 3. Correct color mapping (MATCHES renamed values)
     color_map = {
-        "aave-v3": "#9391f7",
-        "compound-v3": "#38cfa0",
-        "morpho-v1": "#3277fe",
-        "sparklend": "#e55314"
+        "Aave": "#9391f7",
+        "Compound": "#38cfa0",
+        "Morpho": "#3277fe",
+        "SparkLend": "#e55314"
     }
+
+    # 4. Bar chart
     fig_bar = px.bar(
-    df_grouped,
-    x="symbol",
-    y="tvlUsd",
-    color="project",
-    title="TVL Distribution by Token",
-    color_discrete_map={
-        "aave-v3": "#9391f7",
-        "compound-v3": "#38cfa0",
-        "morpho-v1": "#3277fe",
-        "sparklend": "#e55314"
-    },
-    labels={"symbol": "Token", "tvlUsd": "TVL (USD)", "project": "Protocol"}
-)
+        df_yield_grouped,
+        x="symbol",
+        y="tvlUsd",
+        color="project",
+        title="TVL Distribution by Token",
+        color_discrete_map=color_map,
+        labels={
+            "symbol": "Token",
+            "tvlUsd": "TVL (USD)",
+            "project": "Protocol"
+        }
+    )
+
+    # 5. Layout fixes
     fig_bar.update_layout(
+        barmode="stack",
         yaxis_tickformat="$~s",
         xaxis_tickangle=-45,
-        barmode="stack",
         legend_title_text="Protocol",
-        title_x= 0.5,
-        margin=dict(t=50, r=20, l=10, b=40)
+        margin=dict(t=60, r=20, l=10, b=40)
     )
+
     st.plotly_chart(fig_bar, use_container_width=True)

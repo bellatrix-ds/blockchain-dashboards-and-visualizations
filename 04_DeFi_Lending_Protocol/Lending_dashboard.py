@@ -21,7 +21,7 @@ df_yield = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchai
 # -----------------------------
 st.set_page_config(layout="wide")
 st.title("🧮 DeFi Lending Protocol Dashboard")
-st.subheader("🔻 Liquidity, TVL, and Yield Across Top 5 Lending Protocols")
+st.subheader("🏦 Liquidity, TVL, and Yield Across Top 5 Lending Protocols")
 
 
 # -----------------------------

@@ -76,10 +76,7 @@ st.markdown("""
     color: white;
     margin-top: 10px;
     margin-bottom: 1px;
-">
-📊 Lending TVL KPIs
-</h4>
-""", unsafe_allow_html=True)
+" 📊 Total TVL""", unsafe_allow_html=True)
 
 st.markdown("""
 <style>

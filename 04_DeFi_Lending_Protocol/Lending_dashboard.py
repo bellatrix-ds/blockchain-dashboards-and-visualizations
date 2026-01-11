@@ -75,7 +75,7 @@ st.markdown("""
     text-align: center;
     color: white;
     margin-top: 10px;
-    margin-bottom: 4px;
+    margin-bottom: 1px;
 ">
 📊 Lending TVL KPIs
 </h4>

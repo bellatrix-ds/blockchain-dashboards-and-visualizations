@@ -35,9 +35,9 @@ st.markdown("""
 ">
     <h4 style='margin-bottom: 5px;'>📌 Overview</h4>
     <p style='color: #b0b0b0; margin-top: 0;'>This dashboard gives a clear snapshot of the DeFi lending market. 
-    - It shows where liquidity is concentrated, how it changes over time, and which assets offer yield.
-    - Use the time and chain filters to focus on specific markets or periods.
-    - You can filter by chain and select a time period (last 3, 6, or 12 months).</p>
+    * It shows where liquidity is concentrated, how it changes over time, and which assets offer yield.
+    * Use the time and chain filters to focus on specific markets or periods.
+    * You can filter by chain and select a time period (last 3, 6, or 12 months).</p>
 </div>
 """, unsafe_allow_html=True)
 

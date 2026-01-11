@@ -60,7 +60,7 @@ if selected_chain != "All":
 # -----------------------------
 
 st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 30px;">📊 Lending TVL KPIs</h4>
+<h4 style="text-align: center; color: white; margin-top: 50px;">📊 Lending TVL KPIs</h4>
 <hr style="border: none; height: 0; margin: 0; padding: 0;">
 """, unsafe_allow_html=True)
 
@@ -97,12 +97,12 @@ st.markdown("""
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 .kpi-title {
-  font-size: 20px;
+  font-size: 40px;
   color: rgba(255,255,255,0.75);
   margin: 0 0 10px 0;
 }
 .kpi-value {
-  font-size: 50px;
+  font-size: 70px;
   font-weight: 600;
   color: white;
   margin: 0;

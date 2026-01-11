@@ -105,7 +105,7 @@ st.markdown("""
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
-  margin-top: 5px;
+  margin-top: 1px;
 }
 .kpi-card {
   background: rgba(0,0,0,0.35);

@@ -49,16 +49,8 @@ if selected_chain != "All":
 # About Me
 # -----------------------------
 
-with st.sidebar:
-    st.markdown("---")
-    with st.sidebar:
-    c1, c2, c3 = st.columns([1, 2, 1])
-    with c2:
-        st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=140)
 
-
-    
-    # st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=110)  
+st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=110)  
 st.markdown("**My Name Is Bella**")
     st.caption("🧬 Blockchain Research Analyst")
 

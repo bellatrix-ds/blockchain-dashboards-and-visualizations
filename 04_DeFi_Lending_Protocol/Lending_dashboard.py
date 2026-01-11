@@ -104,12 +104,12 @@ with col1:
 # --- Right Chart: Bar chart by token ---
 with col2:
     df_yield_grouped = df_yield.groupby(["symbol", "project"])["tvlUsd"].sum().reset_index()
-
-        rename_map = {
+    rename_map = {
         "aave-v3": "Aave",
         "compound-v3": "Compound",
         "morpho-v1": "Morpho",
-        "sparklend": "SparkLend"}
+        "sparklend": "SparkLend"
+        }
 
     df_yield_grouped["project"] = df_yield_grouped["project"].replace(rename_map)
 

@@ -135,6 +135,7 @@ with col2:
         barmode="stack",
         legend_title_text="Protocol",
         title_x= 0.5,
+        color_discrete_map=color_map,
         margin=dict(t=50, r=20, l=10, b=40)
     )
     st.plotly_chart(fig_bar, use_container_width=True)

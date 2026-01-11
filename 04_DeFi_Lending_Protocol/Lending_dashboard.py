@@ -26,13 +26,17 @@ st.title("📊 DeFi Lending Protocol Dashboard")
 
 
 with st.container():
-    st.markdown("### 🧑‍💻 About This Dashboard")
-    st.info("""
-    This dashboard visualizes the metrics of lending protocol 
-    across multiple blockchains starting from 2025.  
-    You can filter by chain and select a time period (last 3, 6, or 12 months).
-    """)
-
+    st.markdown(
+    """
+    <div style='background-color: white; padding: 20px; border-radius: 12px;'>
+        <p style='color: black; font-size: 16px;'>
+        This dashboard visualizes the metrics of lending protocol across multiple blockchains starting from 2025.<br>
+        You can filter by chain and select a time period (last 3, 6, or 12 months).
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 # -----------------------------
 # Sidebar Filters
 # -----------------------------
@@ -100,6 +104,15 @@ with col1:
 # --- Right Chart: Bar chart by token ---
 with col2:
     df_yield_grouped = df_yield.groupby(["symbol", "project"])["tvlUsd"].sum().reset_index()
+
+        rename_map = {
+        "aave-v3": "Aave",
+        "compound-v3": "Compound",
+        "morpho-v1": "Morpho",
+        "sparklend": "SparkLend"}
+
+    df_yield_grouped["project"] = df_yield_grouped["project"].replace(rename_map)
+
     
     color_map = {
         "aave-v3": "#9391f7",
@@ -121,6 +134,7 @@ with col2:
         xaxis_tickangle=-45,
         barmode="stack",
         legend_title_text="Protocol",
+        title_x=0.5
         margin=dict(t=50, r=20, l=10, b=40)
     )
     st.plotly_chart(fig_bar, use_container_width=True)

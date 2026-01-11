@@ -86,14 +86,12 @@ if selected_chain != "All":
 # -----------------------------
 
 st.markdown("""
-<hr style="border: none; border-top: 1px solid white; margin-top: 20px;">
+<hr style="border: 1px solid #2a2a2a ; border-top: 1px solid white; margin-top: 10px;">
 <h4 style="text-align: center; color: white;">💰 Protocol TVL Overview</h4>
-<hr style="border: none; border-top: 1px solid white; margin-bottom: 20px;">
+<hr style="border: none; border-top: 1px solid white; margin-bottom: 10px;">
 """, unsafe_allow_html=True)
 
 
-
-st.subheader("Protocol TVL Overview")
 col1, col2 = st.columns(2)
 
 # --- Left Chart: TVL over time ---

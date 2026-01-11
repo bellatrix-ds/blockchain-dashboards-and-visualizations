@@ -25,8 +25,6 @@ df_yield = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchai
 st.title("📊 DeFi Lending Protocol Dashboard")
 
 
-# with st.container():
-
 
 st.markdown("""
 <div style="
@@ -43,7 +41,7 @@ You can filter by chain and select a time period (last 3, 6, or 12 months).</p>
 """, unsafe_allow_html=True)
 
 
-st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
 # -----------------------------
 # Sidebar Filters

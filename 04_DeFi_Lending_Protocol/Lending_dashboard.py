@@ -149,3 +149,59 @@ st.subheader("📋 Yield Table")
 df_yield_display = df_yield.copy()
 df_yield_display["project"] = df_yield_display["project"].replace(rename_map)
 st.dataframe(df_yield_display[["project", "chain", "symbol", "tvlUsd", "apy", "apyMean30d"]].sort_values(by="tvlUsd", ascending=False))
+
+
+
+# ---- Protocol Share Pie Chart ----
+st.subheader("📊 Protocol Share of TVL (Latest)")
+
+# Latest date TVL (according to filtered timeframe)
+latest_date = df_filtered['date'].max()
+df_latest = df_filtered[df_filtered['date'] == latest_date]
+
+protocol_share = (
+    df_latest.groupby("protocol")["totalLiquidityUSD"]
+    .sum()
+    .reset_index()
+    .rename(columns={"totalLiquidityUSD":"TVL"})
+)
+
+fig_pie = px.pie(
+    protocol_share,
+    names="protocol",
+    values="TVL",
+    title="Percentage of TVL by Protocol",
+    color="protocol",
+    color_discrete_map={
+        "Aave": "#9391f7",
+        "Compound": "#38cfa0",
+        "Morpho": "#3277fe",
+        "SparkLend": "#e55314"
+    }
+)
+
+fig_pie.update_traces(textposition="inside", textinfo="percent+label")
+st.plotly_chart(fig_pie, use_container_width=True, key="protocol_share_pie")
+
+
+
+st.subheader("📋 APY Table with Positive/Negative Coloring")
+
+# Prepare APY table
+df_apy = df_yield.copy()
+df_apy["project"] = df_apy["project"].replace(rename_map)
+
+# Sort by tvlUsd
+df_apy = df_apy.sort_values(by="tvlUsd", ascending=False)
+
+# Style color based on positive/negative
+def color_apy(val):
+    if val > 0:
+        return 'background-color: #2ecc71; color: white;'  # green
+    elif val < 0:
+        return 'background-color: #e74c3c; color: white;'  # red
+    return ''
+
+df_apy_styled = df_apy[["project","chain","symbol","tvlUsd","apy","apyMean30d"]].style.applymap(color_apy, subset=["apy","apyMean30d"])
+
+st.dataframe(df_apy_styled, use_container_width=True)

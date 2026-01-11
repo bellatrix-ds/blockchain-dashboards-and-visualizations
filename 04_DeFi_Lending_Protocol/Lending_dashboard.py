@@ -29,7 +29,7 @@ with st.container():
     st.markdown(
     """
     <div style='background-color: black; padding: 20px; border-radius: 12px; border: 2px solid white'>
-        <p style='color: white; font-size: 16px;'>
+        <p style='color: #1e68d2; font-size: 16px;'>
         This dashboard visualizes the metrics of lending protocol across multiple blockchains starting from 2025.<br>
         You can filter by chain and select a time period (last 3, 6, or 12 months).
         </p>

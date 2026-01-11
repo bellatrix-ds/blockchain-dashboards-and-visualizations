@@ -70,40 +70,57 @@ df_filtered = df_filtered[df_filtered['date'] >= cutoff]
 if selected_chain != "All":
     df_filtered = df_filtered[df_filtered['chain'] == selected_chain]
 
+
 # -----------------------------
-# Plot
+# Layout with Two Columns
 # -----------------------------
+st.subheader("📈 TVL Metrics")
 
+col1, col2 = st.columns(2)
 
+# ---- Left: Line Chart ----
+with col1:
+    if df_filtered.empty:
+        st.warning("No data available for the selected filters.")
+    else:
+        fig_line = px.line(
+            df_filtered,
+            x="date",
+            y="totalLiquidityUSD",
+            color="chain",
+            labels={
+                "date": "Date",
+                "totalLiquidityUSD": "TVL (USD)",
+                "chain": "Chain"
+            },
+            hover_data={
+                "totalLiquidityUSD": ":.3s",
+                "chain": True,
+                "date": False
+            }
+        )
+        fig_line.update_layout(
+            yaxis_tickformat="$~s",
+            hovermode="x unified",
+            showlegend=False,
+            margin=dict(t=40, r=20, l=10, b=40)
+        )
+        st.plotly_chart(fig_line, use_container_width=True)
 
-st.subheader("📈 TVL Over Time")
-
-if df_filtered.empty:
-    st.warning("No data available for the selected filters.")
-else:
-    fig = px.line(
-        df_filtered,
-        x="date",
-        y="totalLiquidityUSD",
-        color="chain",
+# ---- Right: Bar Chart ----
+with col2:
+    fig_bar = px.bar(
+        df_yield,
+        x="symbol",
+        y="tvlUsd",
+        color="project",
+        hover_data=["chain"],
         labels={
-            "date": "Date",
-            "totalLiquidityUSD": "TVL (USD)",
-            "chain": "Chain"
+            "symbol": "Token",
+            "tvlUsd": "TVL (USD)",
+            "project": "Protocol"
         },
-        hover_data={
-            "totalLiquidityUSD": ":.3s",  # e.g., 3.25B
-            "chain": True,
-            "date": False  # already shown
-        }
+        title="TVL by Token & Protocol"
     )
-
-    # Format y-axis (e.g., $5B)
-    fig.update_layout(
-        yaxis_tickformat="$~s",
-        hovermode="x unified",
-        showlegend=False,  # 🔥 hide legend
-        margin=dict(t=50, r=20, l=10, b=40)
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
+    fig_bar.update_layout(yaxis_tickformat="$~s", xaxis_tickangle=-45)
+    st.plotly_chart(fig_bar, use_container_width=True)

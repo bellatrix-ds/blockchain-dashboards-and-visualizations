@@ -292,6 +292,7 @@ with col2:
     )
 
     fig_pie.update_layout(
+        height=420,
         margin=dict(t=40, r=20, l=10, b=20),
         title_x=0.5,
         showlegend=False

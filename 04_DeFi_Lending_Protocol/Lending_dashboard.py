@@ -65,21 +65,63 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-
+# --- KPI data (same logic as yours) ---
 kpi_df = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()
-
 kpi_df['protocol'] = kpi_df['protocol'].astype(str).str.strip()
-
 tvl_sum = kpi_df.groupby('protocol')['totalLiquidityUSD'].sum()
 
-col1, col2, col3, col4 = st.columns(4)
-protocols = ["Aave", "Compound", "Morpho", "SparkLend"] 
-cols = [col1, col2, col3, col4]
+protocols = ["Aave", "Compound", "Morpho", "SparkLend"]
 
-for col, protocol in zip(cols, protocols):
+# --- KPI cards style (add once) ---
+st.markdown("""
+<style>
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 10px;
+}
+.kpi-card {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+  padding: 18px 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+.kpi-title {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 10px 0;
+}
+.kpi-value {
+  font-size: 42px;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  line-height: 1.0;
+}
+@media (max-width: 1100px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 650px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- Render KPI cards (replaces st.columns + st.metric) ---
+cards_html = '<div class="kpi-grid">'
+for protocol in protocols:
     value = float(tvl_sum.get(protocol, 0.0))
-    col.metric(f"{protocol} TVL", f"${value/1e12:.2f} T") 
+    cards_html += f"""
+      <div class="kpi-card">
+        <p class="kpi-title">{protocol} TVL</p>
+        <p class="kpi-value">${value/1e12:.2f} T</p>
+      </div>
+    """
+cards_html += "</div>"
 
+st.markdown(cards_html, unsafe_allow_html=True)
 
 
 # -----------------------------

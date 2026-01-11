@@ -80,12 +80,14 @@ for i, protocol in enumerate(["Aave", "Compound", "Morpho", "SparkLend"]):
 # -----------------------------
 # Section: Protocol TVL Overview
 # -----------------------------
+
+
 st.markdown("""
-<hr style="border-top: 1px solid white;">
-<h4 style="text-align: center; color: white;">💰 Protocol TVL Overview</h4>
-<hr style="border-top: 1px solid white;">
+<h4 style="text-align: center; color: white; margin-top: 20px;">💰 Protocol TVL Overview</h4>
+<hr style="border-top: 1px solid white; margin-top: 4px;">
 """, unsafe_allow_html=True)
-st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+
+
 
 col1, col2 = st.columns(2)
 

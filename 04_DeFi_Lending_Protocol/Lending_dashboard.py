@@ -26,16 +26,6 @@ st.title("🧮 DeFi Lending Protocol Dashboard")
 # Dashboard Header
 # -----------------------------
 
-st.markdown("""
-<div style="color: #cfcfcf; font-size: 18px; line-height: 1.6;">
-  <p>This dashboard gives a clear snapshot of the DeFi lending market.</p>
-  <ul>
-    <li>Shows where liquidity is concentrated and how it changes over time</li>
-    <li>Highlights which assets and protocols dominate TVL</li>
-    <li>Use the time and chain filters to focus on specific markets or periods</li>
-  </ul>
-</div>
-""", unsafe_allow_html=True)
 
 # -----------------------------
 # Sidebar Filters

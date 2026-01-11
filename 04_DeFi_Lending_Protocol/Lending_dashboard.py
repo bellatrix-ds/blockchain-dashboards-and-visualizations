@@ -303,9 +303,11 @@ with col2:
 # -----------------------------
 # Section: Yield Table
 # -----------------------------
+st.markdown("""
+<h4 style="text-align: center; color: white; margin-top: 30px;">📋 APY Table with Positive/Negative Coloring"</h4>
+<hr style="border: none; height: 0; margin: 0; padding: 0;">
+""", unsafe_allow_html=True)
 
-
-st.subheader("📋 APY Table with Positive/Negative Coloring")
 
 # Prepare APY table
 df_apy = df_yield.copy()
@@ -314,18 +316,36 @@ df_apy["project"] = df_apy["project"].replace(rename_map)
 # Sort by tvlUsd
 df_apy = df_apy.sort_values(by="tvlUsd", ascending=False)
 
+# Rename columns (display names)
+df_apy = df_apy.rename(columns={
+    "project": "Protocol",
+    "tvlUsd": "Total TVL ($)",
+    "apy": "APY BASE",
+    "apyMean30d": "APY 30D AVG"
+})
+
 # Style color based on positive/negative
 def color_apy(val):
     if val > 0:
-        return 'background-color: #2ecc71; color: white;'  # green
+        return "background-color: #2ecc71; color: white;"
     elif val < 0:
-        return 'background-color: #e74c3c; color: white;'  # red
-    return ''
+        return "background-color: #e74c3c; color: white;"
+    return ""
 
-df_apy_styled = df_apy[["project","chain","symbol","tvlUsd","apy","apyMean30d"]].style.applymap(color_apy, subset=["apy","apyMean30d"])
+df_apy_view = df_apy[["Protocol", "chain", "symbol", "Total TVL ($)", "APY BASE", "APY 30D AVG"]]
+
+df_apy_styled = (
+    df_apy_view.style
+    .applymap(color_apy, subset=["APY BASE", "APY 30D AVG"])
+    .format({
+        "Total TVL ($)": "${:,.0f}",
+        "APY BASE": "{:.2%}",
+        "APY 30D AVG": "{:.2%}",
+    })
+    .hide(axis="index")  # remove index column
+)
 
 st.dataframe(df_apy_styled, use_container_width=True)
-
 
 
 # ---- Protocol Share Pie Chart ----

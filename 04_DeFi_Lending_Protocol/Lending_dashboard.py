@@ -59,13 +59,18 @@ if selected_chain != "All":
 # KPI Section
 # -----------------------------
 
-
-
-
 st.markdown("""
 <h4 style="text-align: center; color: white; margin-top: 30px;">📊 Lending TVL KPIs</h4>
 <hr style="border: none; height: 0; margin: 0; padding: 0;">
 """, unsafe_allow_html=True)
+
+
+st.markdown("""
+<style>
+hr { display: none; }
+</style>
+""", unsafe_allow_html=True)
+
 
 
 # ---- KPI values ----
@@ -92,13 +97,13 @@ st.markdown("""
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 .kpi-title {
-  font-size: 14px;
+  font-size: 20px;
   color: rgba(255,255,255,0.75);
   margin: 0 0 10px 0;
 }
 .kpi-value {
-  font-size: 34px;
-  font-weight: 800;
+  font-size: 50px;
+  font-weight: 600;
   color: white;
   margin: 0;
   line-height: 1.0;

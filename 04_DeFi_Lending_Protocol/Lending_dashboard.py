@@ -21,7 +21,7 @@ df_yield = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchai
 # -----------------------------
 st.set_page_config(layout="wide")
 st.title("🧮 DeFi Lending Protocol Dashboard")
-st.subheader("🔻 Liquidity, TVL, and Yield Across Top 4 Lending Protocols")
+st.subheader("🔻 Liquidity, TVL, and Yield Across Top 5 Lending Protocols")
 
 
 # -----------------------------
@@ -51,7 +51,7 @@ with st.sidebar:
     st.markdown("---")
     st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=100)  
     st.markdown("**My name is Bella**")
-    st.caption("🧬 Blockchain Research Analyst")
+    st.caption("Blockchain Research Analyst")
     st.caption("**Get in touch: 👇🏼**")
 
     c1, c2 = st.columns(2)
@@ -71,10 +71,15 @@ st.markdown(" ")
 
 
 st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 10px;">📊 Lending TVL KPIs</h4>
-<hr style="border: none; height: 0; margin: 0; padding: 0;">
+<h4 style="
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 4px;
+">
+📊 Lending TVL KPIs
+</h4>
 """, unsafe_allow_html=True)
-
 
 st.markdown("""
 <style>

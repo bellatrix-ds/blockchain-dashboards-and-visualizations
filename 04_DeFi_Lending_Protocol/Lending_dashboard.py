@@ -65,26 +65,30 @@ st.markdown("""
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
-# latest snapshot based on filtered data (time_range + selected_chain)
-latest_date = df_filtered['date'].max()
+# فقط tvl و همان فیلترهای بالا (df_filtered)
+base = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()
+base['protocol'] = base['protocol'].astype(str).str.strip()
 
-latest = df_filtered[
-    (df_filtered['metric_type'] == 'tvl') &
-    (df_filtered['date'] == latest_date)
-].copy()
+# آخرین رکورد موجود برای هر پروتکل (در بازه انتخاب‌شده)
+latest_by_protocol = (
+    base.sort_values('date')
+        .groupby('protocol', as_index=False)
+        .tail(1)
+)
+
+tvl_by_protocol = latest_by_protocol.groupby('protocol')['totalLiquidityUSD'].sum()
+total_tvl = tvl_by_protocol.sum()
 
 col1, col2, col3, col4 = st.columns(4)
 
-total_value = latest['totalLiquidityUSD'].sum()
-col1.metric("Total TVL", f"${total_value/1e9:.2f} B")
+col1.metric("Total TVL", f"${total_tvl/1e9:.2f} B")
 
-protocols = ["Aave", "Compound", "Morpho"]   # فقط 3 تا چون 3 ستون مانده
+protocols = ["Aave", "Compound", "Morpho"]  # چون 3 ستون باقی می‌ماند
 cols = [col2, col3, col4]
 
 for col, protocol in zip(cols, protocols):
-    value = latest.loc[latest['protocol'] == protocol, 'totalLiquidityUSD'].sum()
+    value = float(tvl_by_protocol.get(protocol, 0.0))
     col.metric(f"{protocol} TVL", f"${value/1e9:.2f} B")
-
 
 # -----------------------------
 # Section: Protocol TVL Overview

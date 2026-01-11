@@ -59,11 +59,11 @@ with st.sidebar:
 
     c1, c2 = st.columns(2)
     with c1:
-        st.link_button("☑️ Portfolio", "https://bellabahrami.carrd.co/")
+        st.link_button("Portfolio", "https://bellabahrami.carrd.co/")
     with c2:
-        st.link_button("☑️GitHub", "https://github.com/bellatrix-ds")
+        st.link_button("GitHub", "https://github.com/bellatrix-ds")
 
-    st.link_button("☑️ x.com", "https://x.com/Bella52496")
+    st.link_button("x.com", "https://x.com/Bella52496")
     st.markdown("---")
 
 

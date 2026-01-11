@@ -65,18 +65,19 @@ st.markdown("""
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
-kpi_df = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()
-kpi_df['protocol'] = kpi_df['protocol'].astype(str).str.strip()
+kpi = data.copy()
+kpi['protocol'] = kpi['protocol'].astype(str).str.strip()
 
-tvl_sum = kpi_df.groupby('protocol')['totalLiquidityUSD'].sum()
+tvl_sum = kpi.groupby('protocol', dropna=False)['totalLiquidityUSD'].sum()
 
-col1, col2, col3, col4 = st.columns(4)
-protocols = ["Aave", "Compound", "Morpho", "SparkLend"]  # اگر Sky هم می‌خواهید اضافه کنید
-cols = [col1, col2, col3, col4]
+protocols = ["Aave", "Compound", "Morpho", "SparkLend"]  # اگر Sky هم می‌خواهی، گزینه 2
+cols = st.columns(4)
 
 for col, protocol in zip(cols, protocols):
     value = float(tvl_sum.get(protocol, 0.0))
-    col.metric(f"{protocol} TVL", f"${value/1e12:.2f} T")  # چون اعداد شما تریلیونی‌اند
+    col.metric(f"{protocol} TVL", f"${value/1e12:.2f} T")
+
+
 
 # -----------------------------
 # Section: Protocol TVL Overview

@@ -46,6 +46,26 @@ if selected_chain != "All":
     df_filtered = df_filtered[df_filtered["chain"] == selected_chain]
 
 # -----------------------------
+# About Me
+# -----------------------------
+with st.sidebar:
+    st.markdown("---")
+    st.image("JGqdjaIW_400x400.jpg", width=110)  
+    st.markdown("**Bella**")
+    st.caption("Blockchain Research Analyst")
+
+    c1, c2 = st.columns(2)
+    with c1:
+        st.link_button("Portfolio", "https://bellabahrami.carrd.co/")
+    with c2:
+        st.link_button("GitHub", "https://github.com/bellatrix-ds")
+
+    st.link_button("x.com", "https://x.com/Bella52496")
+    st.markdown("---")
+
+
+
+# -----------------------------
 # KPI Section
 # -----------------------------
 

@@ -169,9 +169,13 @@ with col1:
     title="TVL Distribution by Chain Over Time",
     labels={"date": "Date", "totalLiquidityUSD": "TVL (USD)", "chain": "Chain"},
 )
+    fig.update_yaxes(
+    type="log",
+    tickvals=[2e7, 5e7, 1e8, 2e8, 5e8, 1e9, 2e9, 5e9, 1e10, 2e10, 5e10],
+    ticktext=["$20M", "$50M", "$100M", "$200M", "$500M",
+              "$1B", "$2B", "$5B", "$10B", "$20B", "$50B"]
+)
     fig.update_layout(
-    yaxis_tickformat="$~s",
-        yaxis_type="log",
     hovermode="x unified",
     showlegend=False,
     margin=dict(t=50, r=20, l=10, b=40),

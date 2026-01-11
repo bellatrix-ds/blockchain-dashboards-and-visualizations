@@ -66,16 +66,12 @@ st.markdown("""
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
 
-latest_date = df_filtered['date'].max()
-latest = df_filtered[df_filtered['date'] == latest_date]
-
 col1, col2, col3, col4 = st.columns(4)
 
 protocols = ["Aave", "Compound", "Morpho", "SparkLend"]
 cols = [col1, col2, col3, col4]
 
-total_tvl = latest['totalLiquidityUSD'].sum()
-col1.metric("💰 Total TVL", f"${total_tvl/1e9:.2f} B")
+
 
 for col, protocol in zip(cols[1:], protocols):
     value = latest[latest['protocol'] == protocol]['totalLiquidityUSD'].sum()

@@ -6,16 +6,18 @@ import matplotlib.ticker as mtick
 import plotly.express as px
 
 # -----------------------------
-# Load Data
+# Load Main TVL Data
 # -----------------------------
 df = pd.read_csv(
-    "https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/main/04_DeFi_Lending_Protocol/final_data.csv"
-)
+    "https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/main/04_DeFi_Lending_Protocol/final_data.csv")
 
 df['date'] = pd.to_datetime(df['date'])
-
-# Keep data after 2025
 df = df[df['date'] >= '2025-01-01']
+
+# -----------------------------
+# Load Yield TVL Token-level Data
+# -----------------------------
+df_yield = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/04_DeFi_Lending_Protocol/df_yeild_final.csv")
 
 # -----------------------------
 # Title & Description
@@ -23,14 +25,13 @@ df = df[df['date'] >= '2025-01-01']
 st.title("📊 DeFi Lending Protocol Dashboard")
 
 
-st.markdown("### 🧑‍💻 About This Dashboard")
-st.markdown("""
-This dashboard visualizes the metrics of lending protocol 
-across multiple blockchains starting from 2025.  
-You can filter by chain and select a time period (last 3, 6, or 12 months).
-""")
-
-
+with st.container():
+    st.markdown("### 🧑‍💻 About This Dashboard")
+    st.info("""
+    This dashboard visualizes the metrics of lending protocol 
+    across multiple blockchains starting from 2025.  
+    You can filter by chain and select a time period (last 3, 6, or 12 months).
+    """)
 
 # -----------------------------
 # Sidebar Filters

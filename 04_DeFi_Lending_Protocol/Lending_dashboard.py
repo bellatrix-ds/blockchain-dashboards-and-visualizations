@@ -271,6 +271,33 @@ with col1:
 
 
 with col2:
+    df_token_pie = (
+        df_yield_grouped.groupby("symbol", as_index=False)["tvlUsd"]
+        .sum()
+        .sort_values("tvlUsd", ascending=False)
+    )
+
+    fig_pie = px.pie(
+        df_token_pie,
+        names="symbol",
+        values="tvlUsd",
+        title="Total TVL Locked by Token",
+        hole=0.45
+    )
+
+    fig_pie.update_traces(
+        textposition="inside",
+        textinfo="percent+label",
+        hovertemplate="<b>%{label}</b><br>TVL: %{value:$,.2s}<br>Share: %{percent}<extra></extra>"
+    )
+
+    fig_pie.update_layout(
+        margin=dict(t=60, r=20, l=10, b=40),
+        title_x=0.5,
+        showlegend=False
+    )
+
+    st.plotly_chart(fig_pie, use_container_width=True)
 
 
 # -----------------------------

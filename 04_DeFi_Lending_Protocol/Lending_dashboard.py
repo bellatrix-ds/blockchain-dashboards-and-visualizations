@@ -159,7 +159,7 @@ df_plot = (
 
 
 with col1:
-fig = px.line(
+    fig = px.line(
     df_plot,
     x="date",
     y="totalLiquidityUSD",
@@ -167,14 +167,14 @@ fig = px.line(
     title="TVL Distribution by Chain Over Time",
     labels={"date": "Date", "totalLiquidityUSD": "TVL (USD)", "chain": "Chain"},
 )
-fig.update_layout(
+    fig.update_layout(
     yaxis_tickformat="$~s",
     hovermode="x unified",
     showlegend=False,
     margin=dict(t=50, r=20, l=10, b=40),
     xaxis_tickangle=-45
 )
-st.plotly_chart(fig, use_container_width=True)        
+    st.plotly_chart(fig, use_container_width=True)        
 
 
 

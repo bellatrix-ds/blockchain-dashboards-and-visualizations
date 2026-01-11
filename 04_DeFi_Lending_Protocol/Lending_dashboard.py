@@ -189,6 +189,18 @@ with col1:
 
 # --- Right Chart: TVL by Token ---
 with col2:
+  
+
+# --------------
+st.markdown("""
+<h4 style="text-align: center; color: white; margin-top: 60px;">💰💎 Protocol TVL By Token</h4>
+<hr style="border-top: 1px solid gray; margin-top: 4px;">
+""", unsafe_allow_html=True)
+
+
+col1, col2 = st.columns(2)
+
+with col1:
     df_yield_grouped = df_yield.groupby(["symbol", "project"], as_index=False)["tvlUsd"].sum()
     rename_map = {
         "aave-v3": "Aave",
@@ -224,11 +236,9 @@ with col2:
     )
     st.plotly_chart(fig_bar, use_container_width=True)
 
-# --------------
-st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 60px;">💰💎 Protocol TVL By Token</h4>
-<hr style="border-top: 1px solid gray; margin-top: 4px;">
-""", unsafe_allow_html=True)
+
+with col2:
+
 
 # -----------------------------
 # Section: Yield Table

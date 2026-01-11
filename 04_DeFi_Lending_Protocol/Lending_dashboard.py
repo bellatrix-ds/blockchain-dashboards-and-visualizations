@@ -37,6 +37,23 @@ with st.container():
     """,
     unsafe_allow_html=True
 )
+
+
+st.markdown("""
+<div style="
+    background-color: #111111;
+    padding: 20px 25px;
+    border-radius: 10px;
+    border: 1px solid #2a2a2a;
+    color: white;
+">
+    <h4 style='margin-bottom: 5px;'>Upcoming Unlocks</h4>
+    <p style='color: #b0b0b0; margin-top: 0;'>$1.295b over 14 days</p>
+</div>
+""", unsafe_allow_html=True)
+
+
+
 # -----------------------------
 # Sidebar Filters
 # -----------------------------

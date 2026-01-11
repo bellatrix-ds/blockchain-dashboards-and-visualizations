@@ -328,7 +328,7 @@ df_apy = df_apy.rename(columns={
 def color_apy(val):
     if val > 0:
         return "background-color: #2ecc71; color: white;"
-    elif val < 0:
+    elif val <= 0:
         return "background-color: #e74c3c; color: white;"
     return ""
 

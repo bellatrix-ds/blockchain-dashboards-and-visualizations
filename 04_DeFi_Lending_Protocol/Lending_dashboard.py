@@ -59,8 +59,8 @@ if selected_chain != "All":
 # KPI Section
 # -----------------------------
 st.markdown("""
-<h4 style="text-align: center; color: gray; margin-top: 20px;">📊 Lending TVL KPIs</h4>
-<hr style="border-top: 1px solid white; margin-top: 4px;">
+<h4 style="text-align: center; color: white; margin-top: 20px;">📊 Lending TVL KPIs</h4>
+<hr style="border-top: 1px solid gray; margin-top: 4px;">
 """, unsafe_allow_html=True)
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
@@ -84,7 +84,7 @@ for i, protocol in enumerate(["Aave", "Compound", "Morpho", "SparkLend"]):
 
 st.markdown("""
 <h4 style="text-align: center; color: white; margin-top: 20px;">💰 Protocol TVL Overview</h4>
-<hr style="border-top: 1px solid white; margin-top: 4px;">
+<hr style="border-top: 1px solid gray; margin-top: 4px;">
 """, unsafe_allow_html=True)
 
 

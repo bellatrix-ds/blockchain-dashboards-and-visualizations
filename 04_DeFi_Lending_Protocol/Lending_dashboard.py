@@ -143,24 +143,42 @@ st.markdown("""
 col1, col2 = st.columns(2)
 
 # --- Left Chart: TVL Trend Over Time ---
+
+
+df_plot = df_filtered.copy()
+df_plot["chain"] = df_plot["chain"].astype(str).str.strip()
+
+# if you only want TVL:
+df_plot = df_plot[df_plot["metric_type"] == "tvl"]
+
+df_plot = (
+    df_plot.groupby(["date", "chain"], as_index=False)["totalLiquidityUSD"]
+    .sum()
+    .sort_values(["chain", "date"])
+)
+
+
 with col1:
-    fig = px.line(
-        df_filtered,
-        x="date",
-        y="totalLiquidityUSD",
-        color="chain",
-        title="TVL Distribution by Chain Over Time",
-        labels={"date": "Date", "totalLiquidityUSD": "TVL (USD)", "chain": "Chain"},
-        hover_data={"totalLiquidityUSD": ":.3s", "chain": True, "date": False}
-    )
-    fig.update_layout(
-        yaxis_tickformat="$~s",
-        hovermode="x unified",
-        showlegend=False,
-        margin=dict(t=50, r=20, l=10, b=40),
-        xaxis_tickangle=-45
-    )
-    st.plotly_chart(fig, use_container_width=True)
+fig = px.line(
+    df_plot,
+    x="date",
+    y="totalLiquidityUSD",
+    color="chain",
+    title="TVL Distribution by Chain Over Time",
+    labels={"date": "Date", "totalLiquidityUSD": "TVL (USD)", "chain": "Chain"},
+)
+fig.update_layout(
+    yaxis_tickformat="$~s",
+    hovermode="x unified",
+    showlegend=False,
+    margin=dict(t=50, r=20, l=10, b=40),
+    xaxis_tickangle=-45
+)
+st.plotly_chart(fig, use_container_width=True)        
+
+
+
+
 
 # --- Right Chart: TVL by Token ---
 with col2:

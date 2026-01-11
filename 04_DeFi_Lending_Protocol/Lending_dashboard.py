@@ -90,6 +90,8 @@ hr { display: none; }
 
 
 # ---- KPI values ----
+
+
 kpi_df = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()
 kpi_df['protocol'] = kpi_df['protocol'].astype(str).str.strip()
 tvl_sum = kpi_df.groupby('protocol')['totalLiquidityUSD'].sum()
@@ -103,7 +105,7 @@ st.markdown("""
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 .kpi-card {
   background: rgba(0,0,0,0.35);

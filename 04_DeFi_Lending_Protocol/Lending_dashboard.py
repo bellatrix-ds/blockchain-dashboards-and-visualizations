@@ -134,7 +134,7 @@ with col2:
         xaxis_tickangle=-45,
         barmode="stack",
         legend_title_text="Protocol",
-        title_x=0.5
+        title_x= 0,5
         margin=dict(t=50, r=20, l=10, b=40)
     )
     st.plotly_chart(fig_bar, use_container_width=True)

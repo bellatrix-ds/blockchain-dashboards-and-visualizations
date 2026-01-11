@@ -8,6 +8,8 @@ import plotly.express as px
 df = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/04_DeFi_Lending_Protocol/final_data.csv")
 df['date'] = pd.to_datetime(df['date'])
 df = df[df['date'] >= '2025-01-01']
+df = df[df['date'] < '2026-01-01']
+
 
 # -----------------------------
 # Load Yield Data

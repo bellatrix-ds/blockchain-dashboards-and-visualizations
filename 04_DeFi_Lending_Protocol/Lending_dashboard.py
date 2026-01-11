@@ -136,7 +136,7 @@ st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
 
 st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 60px;">💰 Protocol TVL Overview</h4>
+<h4 style="text-align: center; color: white; margin-top: 60px;">💰⛓️‍💥 Protocol TVL By Chain</h4>
 <hr style="border-top: 1px solid gray; margin-top: 4px;">
 """, unsafe_allow_html=True)
 
@@ -224,15 +224,37 @@ with col2:
     )
     st.plotly_chart(fig_bar, use_container_width=True)
 
+# --------------
+st.markdown("""
+<h4 style="text-align: center; color: white; margin-top: 60px;">💰💎 Protocol TVL By Token</h4>
+<hr style="border-top: 1px solid gray; margin-top: 4px;">
+""", unsafe_allow_html=True)
+
 # -----------------------------
 # Section: Yield Table
 # -----------------------------
-st.markdown("<hr style='margin: 40px 0;'>", unsafe_allow_html=True)
-st.subheader("📋 Yield Table")
 
-df_yield_display = df_yield.copy()
-df_yield_display["project"] = df_yield_display["project"].replace(rename_map)
-st.dataframe(df_yield_display[["project", "chain", "symbol", "tvlUsd", "apy", "apyMean30d"]].sort_values(by="tvlUsd", ascending=False))
+
+st.subheader("📋 APY Table with Positive/Negative Coloring")
+
+# Prepare APY table
+df_apy = df_yield.copy()
+df_apy["project"] = df_apy["project"].replace(rename_map)
+
+# Sort by tvlUsd
+df_apy = df_apy.sort_values(by="tvlUsd", ascending=False)
+
+# Style color based on positive/negative
+def color_apy(val):
+    if val > 0:
+        return 'background-color: #2ecc71; color: white;'  # green
+    elif val < 0:
+        return 'background-color: #e74c3c; color: white;'  # red
+    return ''
+
+df_apy_styled = df_apy[["project","chain","symbol","tvlUsd","apy","apyMean30d"]].style.applymap(color_apy, subset=["apy","apyMean30d"])
+
+st.dataframe(df_apy_styled, use_container_width=True)
 
 
 
@@ -268,24 +290,3 @@ fig_pie.update_traces(textposition="inside", textinfo="percent+label")
 st.plotly_chart(fig_pie, use_container_width=True, key="protocol_share_pie")
 
 
-
-st.subheader("📋 APY Table with Positive/Negative Coloring")
-
-# Prepare APY table
-df_apy = df_yield.copy()
-df_apy["project"] = df_apy["project"].replace(rename_map)
-
-# Sort by tvlUsd
-df_apy = df_apy.sort_values(by="tvlUsd", ascending=False)
-
-# Style color based on positive/negative
-def color_apy(val):
-    if val > 0:
-        return 'background-color: #2ecc71; color: white;'  # green
-    elif val < 0:
-        return 'background-color: #e74c3c; color: white;'  # red
-    return ''
-
-df_apy_styled = df_apy[["project","chain","symbol","tvlUsd","apy","apyMean30d"]].style.applymap(color_apy, subset=["apy","apyMean30d"])
-
-st.dataframe(df_apy_styled, use_container_width=True)

@@ -75,8 +75,7 @@ for i, protocol in enumerate(["Aave", "Compound", "Morpho", "SparkLend"]):
     value = latest[latest['protocol'] == protocol]['totalLiquidityUSD'].sum()
     if not value:
         continue
-    [col2, col3, col4][i % 3].metric(f"{protocol} TVL", f"${value/1e9:.2f} B")
-
+    [col1, col2, col3, col4][i].metric(f"{protocol} TVL", f"${value/1e9:.2f} B")
 # -----------------------------
 # Section: Protocol TVL Overview
 # -----------------------------

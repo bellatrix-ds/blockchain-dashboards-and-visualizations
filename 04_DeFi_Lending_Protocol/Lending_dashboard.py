@@ -20,7 +20,7 @@ df_yield = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchai
 # Page Config
 # -----------------------------
 st.set_page_config(layout="wide")
-st.title("📊 DeFi Lending Protocol Dashboard")
+st.title("🧮 DeFi Lending Protocol Dashboard")
 
 # -----------------------------
 # Dashboard Header
@@ -33,8 +33,8 @@ st.markdown("""
     border: 1px solid #333;
     color: white;
 ">
-    <h4 style='margin-bottom: 5px;'>📋 Overview</h4>
-    <p style='color: #b0b0b0; margin-top: 0;'>This dashboard visualizes the metrics of lending protocol across multiple blockchains starting from 2025.
+    <h4 style='margin-bottom: 5px;'>📌 Overview</h4>
+    <p style='color: #b0b0b0; margin-top: 0;'>This dashboard provides a clear, end-to-end view of the DeFi lending landscape across major protocols, chains, and assets. It is designed to help users quickly understand where liquidity is concentrated, how it evolves over time, and where yields are most attractive.
 You can filter by chain and select a time period (last 3, 6, or 12 months).</p>
 </div>
 """, unsafe_allow_html=True)

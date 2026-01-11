@@ -337,35 +337,7 @@ df_apy_styled = (
 st.dataframe(df_apy_styled, use_container_width=True)
 
 
-# ---- Protocol Share Pie Chart ----
-st.subheader("📊 Protocol Share of TVL (Latest)")
+# ---- Footage ----
 
-# Latest date TVL (according to filtered timeframe)
-latest_date = df_filtered['date'].max()
-df_latest = df_filtered[df_filtered['date'] == latest_date]
-
-protocol_share = (
-    df_latest.groupby("protocol")["totalLiquidityUSD"]
-    .sum()
-    .reset_index()
-    .rename(columns={"totalLiquidityUSD":"TVL"})
-)
-
-fig_pie = px.pie(
-    protocol_share,
-    names="protocol",
-    values="TVL",
-    title="Percentage of TVL by Protocol",
-    color="protocol",
-    color_discrete_map={
-        "Aave": "#9391f7",
-        "Compound": "#38cfa0",
-        "Morpho": "#3277fe",
-        "SparkLend": "#e55314"
-    }
-)
-
-fig_pie.update_traces(textposition="inside", textinfo="percent+label")
-st.plotly_chart(fig_pie, use_container_width=True, key="protocol_share_pie")
 
 

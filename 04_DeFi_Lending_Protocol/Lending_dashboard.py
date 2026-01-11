@@ -65,28 +65,18 @@ st.markdown("""
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
-# Base: هم‌راستا با فیلترهای time_range و selected_chain
-base = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()
-base['protocol'] = base['protocol'].astype(str).str.strip()
+kpi_df = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()
+kpi_df['protocol'] = kpi_df['protocol'].astype(str).str.strip()
 
-# آخرین رکورد موجود برای هر پروتکل (در بازه/چین انتخاب‌شده)
-latest_by_protocol = (
-    base.sort_values('date')
-        .groupby('protocol', as_index=False)
-        .tail(1)
-)
+tvl_sum = kpi_df.groupby('protocol')['totalLiquidityUSD'].sum()
 
-tvl_by_protocol = latest_by_protocol.set_index('protocol')['totalLiquidityUSD']
-
-# KPI columns
 col1, col2, col3, col4 = st.columns(4)
-protocols = ["Aave", "Compound", "Morpho", "SparkLend"]
+protocols = ["Aave", "Compound", "Morpho", "SparkLend"]  # اگر Sky هم می‌خواهید اضافه کنید
 cols = [col1, col2, col3, col4]
 
 for col, protocol in zip(cols, protocols):
-    value = float(tvl_by_protocol.get(protocol, 0.0))
-    col.metric(f"{protocol} TVL", f"${value/1e9:.2f} B")
-
+    value = float(tvl_sum.get(protocol, 0.0))
+    col.metric(f"{protocol} TVL", f"${value/1e12:.2f} T")  # چون اعداد شما تریلیونی‌اند
 
 # -----------------------------
 # Section: Protocol TVL Overview

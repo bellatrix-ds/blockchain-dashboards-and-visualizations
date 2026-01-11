@@ -34,7 +34,8 @@ st.markdown("""
     color: white;
 ">
     <h4 style='margin-bottom: 5px;'>📌 Overview</h4>
-    <p style='color: #b0b0b0; margin-top: 0;'>This dashboard provides a clear, end-to-end view of the DeFi lending landscape across major protocols, chains, and assets. It is designed to help users quickly understand where liquidity is concentrated, how it evolves over time, and where yields are most attractive.
+    <p style='color: #b0b0b0; margin-top: 0;'>This dashboard gives a clear snapshot of the DeFi lending market. It shows where liquidity is concentrated, how it changes over time, and which assets offer yield.Use the time and chain filters to focus on specific markets or periods.
+Overall, this dashboard helps you quickly understand liquidity trends, protocol dominance, and yield opportunities in DeFi lending.
 You can filter by chain and select a time period (last 3, 6, or 12 months).</p>
 </div>
 """, unsafe_allow_html=True)
@@ -62,7 +63,7 @@ if selected_chain != "All":
 # -----------------------------
 
 st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 30px;">📊 Lending TVL KPIs</h4>
+<h4 style="text-align: center; color: white; margin-top: 10px;">📊 Lending TVL KPIs</h4>
 <hr style="border: none; height: 0; margin: 0; padding: 0;">
 """, unsafe_allow_html=True)
 

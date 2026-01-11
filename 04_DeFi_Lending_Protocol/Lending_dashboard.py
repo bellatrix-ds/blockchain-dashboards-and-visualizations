@@ -66,16 +66,26 @@ st.markdown("""
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
 
+latest_date = df_filtered['date'].max()
+latest = df_filtered[df_filtered['date'] == latest_date]
+
 col1, col2, col3, col4 = st.columns(4)
-latest = df_filtered[df_filtered['date'] == df_filtered['date'].max()]
+
+protocols = ["Aave", "Compound", "Morpho", "SparkLend"]
+cols = [col1, col2, col3, col4]
+
 total_tvl = latest['totalLiquidityUSD'].sum()
 col1.metric("💰 Total TVL", f"${total_tvl/1e9:.2f} B")
 
-for i, protocol in enumerate(["Aave", "Compound", "Morpho", "SparkLend"]):
+for col, protocol in zip(cols[1:], protocols):
     value = latest[latest['protocol'] == protocol]['totalLiquidityUSD'].sum()
-    if not value:
-        continue
-    [col1, col2, col3, col4][i].metric(f"{protocol} TVL", f"${value/1e9:.2f} B")
+    col.metric(
+        f"{protocol} TVL",
+        f"${value/1e9:.2f} B"
+    )
+
+
+
 # -----------------------------
 # Section: Protocol TVL Overview
 # -----------------------------

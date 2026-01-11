@@ -304,7 +304,7 @@ with col2:
 # Section: Yield Table
 # -----------------------------
 st.markdown("""
-<h4 style="text-align: center; color: white; margin-top: 30px;">📋 APY Table with Positive/Negative Coloring"</h4>
+<h4 style="text-align: center; color: white; margin-top: 30px;">🔦 APY Table with 🟢 Positive/🔴 Negative Coloring</h4>
 <hr style="border: none; height: 0; margin: 0; padding: 0;">
 """, unsafe_allow_html=True)
 
@@ -332,7 +332,7 @@ def color_apy(val):
         return "background-color: #e74c3c; color: white;"
     return ""
 
-df_apy_view = df_apy[["Protocol", "chain", "symbol", "Total TVL ($)", "APY BASE", "APY 30D AVG"]]
+df_apy_view = df_apy[["Protocol", "chain", "symbol", "Total TVL ($)", "APY BASE", "APY 30 Days Avg"]]
 
 df_apy_styled = (
     df_apy_view.style

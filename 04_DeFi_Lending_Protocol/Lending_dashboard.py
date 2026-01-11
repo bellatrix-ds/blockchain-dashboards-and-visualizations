@@ -25,18 +25,7 @@ df_yield = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchai
 st.title("📊 DeFi Lending Protocol Dashboard")
 
 
-with st.container():
-    st.markdown(
-    """
-    <div style='background-color: black; padding: 20px; border-radius: 12px; border: 2px solid gray'>
-        <p style='color: white; font-size: 16px;'>
-        This dashboard visualizes the metrics of lending protocol across multiple blockchains starting from 2025.<br>
-        You can filter by chain and select a time period (last 3, 6, or 12 months).
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# with st.container():
 
 
 st.markdown("""
@@ -48,11 +37,13 @@ st.markdown("""
     color: white;
 ">
     <h4 style='margin-bottom: 5px;'>Upcoming Unlocks</h4>
-    <p style='color: #b0b0b0; margin-top: 0;'>$1.295b over 14 days</p>
+    <p style='color: #b0b0b0; margin-top: 0;'>This dashboard visualizes the metrics of lending protocol across multiple blockchains starting from 2025.
+You can filter by chain and select a time period (last 3, 6, or 12 months).</p>
 </div>
 """, unsafe_allow_html=True)
 
 
+st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
 
 # -----------------------------
 # Sidebar Filters

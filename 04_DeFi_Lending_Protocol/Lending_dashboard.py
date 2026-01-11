@@ -53,17 +53,17 @@ if selected_chain != "All":
 with st.sidebar:
     st.markdown("---")
     st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=100)  
-    st.markdown("**My Name Is Bella**")
+    st.markdown("**My name is Bella**")
     st.caption("🧬 Blockchain Research Analyst")
-    st.markdown("**Get in touch: 👇🏼**")
+    st.caption("**Get in touch: 👇🏼**")
 
     c1, c2 = st.columns(2)
     with c1:
-        st.link_button("Portfolio", "https://bellabahrami.carrd.co/")
+        st.link_button("☑️ Portfolio", "https://bellabahrami.carrd.co/")
     with c2:
-        st.link_button("GitHub", "https://github.com/bellatrix-ds")
+        st.link_button("☑️GitHub", "https://github.com/bellatrix-ds")
 
-    st.link_button("x.com", "https://x.com/Bella52496")
+    st.link_button("☑️ x.com", "https://x.com/Bella52496")
     st.markdown("---")
 
 

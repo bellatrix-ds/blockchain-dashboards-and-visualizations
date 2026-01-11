@@ -100,6 +100,13 @@ with col1:
 # --- Right Chart: Bar chart by token ---
 with col2:
     df_yield_grouped = df_yield.groupby(["symbol", "project"])["tvlUsd"].sum().reset_index()
+    
+    color_map = {
+        "aave-v3": "#9391f7",
+        "compound-v3": "#38cfa0",
+        "morpho-v1": "#3277fe",
+        "sparklend": "#e55314"
+    }
     fig_bar = px.bar(
         df_yield_grouped,
         x="symbol",

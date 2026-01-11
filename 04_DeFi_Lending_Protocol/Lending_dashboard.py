@@ -58,7 +58,15 @@ if selected_chain != "All":
 # -----------------------------
 # KPI Section
 # -----------------------------
-st.markdown("___📊 Lending TVL KPIs ___")
+st.markdown("""
+<hr style="border-top: 1px solid white;">
+<h4 style="text-align: center; color: white;">📊 Lending TVL KPIs </h4>
+<hr style="border-top: 1px solid white;">
+""", unsafe_allow_html=True)
+
+
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+
 
 col1, col2, col3, col4 = st.columns(4)
 latest = df_filtered[df_filtered['date'] == df_filtered['date'].max()]

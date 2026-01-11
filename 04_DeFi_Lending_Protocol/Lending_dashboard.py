@@ -52,9 +52,8 @@ if selected_chain != "All":
 
 st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=110)  
 st.markdown("**My Name Is Bella**")
-    st.caption("🧬 Blockchain Research Analyst")
-
-    st.markdown("**Get in touch: 👇🏼**")
+st.caption("🧬 Blockchain Research Analyst")
+st.markdown("**Get in touch: 👇🏼**")
 
     c1, c2 = st.columns(2)
     with c1:

@@ -58,10 +58,9 @@ if selected_chain != "All":
 # -----------------------------
 # KPI Section
 # -----------------------------
-st.subheader("📊 Lending TVL KPIs")
+st.subheader("## 📊 Lending TVL KPIs")
 
 
-st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 kpi_df = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()
 kpi_df['protocol'] = kpi_df['protocol'].astype(str).str.strip()
 tvl_sum = kpi_df.groupby('protocol')['totalLiquidityUSD'].sum()

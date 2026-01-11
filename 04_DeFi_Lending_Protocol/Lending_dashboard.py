@@ -171,6 +171,7 @@ with col1:
 )
     fig.update_layout(
     yaxis_tickformat="$~s",
+        yaxis_type="log",
     hovermode="x unified",
     showlegend=False,
     margin=dict(t=50, r=20, l=10, b=40),

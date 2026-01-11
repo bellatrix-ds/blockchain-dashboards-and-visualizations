@@ -29,7 +29,7 @@ with st.container():
     st.markdown(
     """
     <div style='background-color: gray; padding: 20px; border-radius: 12px;'>
-        <p style='color: black; font-size: 16px;'>
+        <p style='color: white; font-size: 16px;'>
         This dashboard visualizes the metrics of lending protocol across multiple blockchains starting from 2025.<br>
         You can filter by chain and select a time period (last 3, 6, or 12 months).
         </p>
@@ -121,14 +121,19 @@ with col2:
         "sparklend": "#e55314"
     }
     fig_bar = px.bar(
-        df_yield_grouped,
-        x="symbol",
-        y="tvlUsd",
-        color="project",
-        color_discrete_map=color_map,
-        labels={"tvlUsd": "TVL (USD)", "symbol": "Token", "project": "Protocol"},
-        title="TVL Distribution by Token",
-    )
+    df_grouped,
+    x="symbol",
+    y="tvlUsd",
+    color="project",
+    title="TVL Distribution by Token",
+    color_discrete_map={
+        "aave-v3": "#9391f7",
+        "compound-v3": "#38cfa0",
+        "morpho-v1": "#3277fe",
+        "sparklend": "#e55314"
+    },
+    labels={"symbol": "Token", "tvlUsd": "TVL (USD)", "project": "Protocol"}
+)
     fig_bar.update_layout(
         yaxis_tickformat="$~s",
         xaxis_tickangle=-45,

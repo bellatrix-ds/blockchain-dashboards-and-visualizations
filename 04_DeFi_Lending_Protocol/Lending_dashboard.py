@@ -55,7 +55,7 @@ st.markdown("**My Name Is Bella**")
 st.caption("🧬 Blockchain Research Analyst")
 st.markdown("**Get in touch: 👇🏼**")
 
-    c1, c2 = st.columns(2)
+c1, c2 = st.columns(2)
     with c1:
         st.link_button("Portfolio", "https://bellabahrami.carrd.co/")
     with c2:

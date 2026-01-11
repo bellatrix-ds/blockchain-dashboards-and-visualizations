@@ -74,53 +74,45 @@ if selected_chain != "All":
 # -----------------------------
 # Layout with Two Columns
 # -----------------------------
-st.subheader("📈 TVL Metrics")
-
+st.subheader("📈 Protocol TVL Overview")
 col1, col2 = st.columns(2)
 
-# ---- Left: Line Chart ----
+# --- Left Chart: TVL over time ---
 with col1:
-    if df_filtered.empty:
-        st.warning("No data available for the selected filters.")
-    else:
-        fig_line = px.line(
-            df_filtered,
-            x="date",
-            y="totalLiquidityUSD",
-            color="chain",
-            labels={
-                "date": "Date",
-                "totalLiquidityUSD": "TVL (USD)",
-                "chain": "Chain"
-            },
-            hover_data={
-                "totalLiquidityUSD": ":.3s",
-                "chain": True,
-                "date": False
-            }
-        )
-        fig_line.update_layout(
-            yaxis_tickformat="$~s",
-            hovermode="x unified",
-            showlegend=False,
-            margin=dict(t=40, r=20, l=10, b=40)
-        )
-        st.plotly_chart(fig_line, use_container_width=True)
+    fig = px.line(
+        df_filtered,
+        x="date",
+        y="totalLiquidityUSD",
+        color="chain",
+        labels={"date": "Date", "totalLiquidityUSD": "TVL (USD)", "chain": "Chain"},
+        hover_data={"totalLiquidityUSD": ":.3s", "chain": True, "date": False},
+        title="TVL Distribution by Chain Over Time"
+    )
+    fig.update_layout(
+        yaxis_tickformat="$~s",
+        hovermode="x unified",
+        showlegend=False,
+        margin=dict(t=50, r=20, l=10, b=40),
+        xaxis_tickangle=-45  # Rotate x labels
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
-# ---- Right: Bar Chart ----
+# --- Right Chart: Bar chart by token ---
 with col2:
+    df_yield_grouped = df_yield.groupby(["symbol", "project"])["tvlUsd"].sum().reset_index()
     fig_bar = px.bar(
-        df_yield,
+        df_yield_grouped,
         x="symbol",
         y="tvlUsd",
         color="project",
-        hover_data=["chain"],
-        labels={
-            "symbol": "Token",
-            "tvlUsd": "TVL (USD)",
-            "project": "Protocol"
-        },
-        title="TVL by Token & Protocol"
+        labels={"tvlUsd": "TVL (USD)", "symbol": "Token", "project": "Protocol"},
+        title="TVL Distribution by Token",
     )
-    fig_bar.update_layout(yaxis_tickformat="$~s", xaxis_tickangle=-45)
+    fig_bar.update_layout(
+        yaxis_tickformat="$~s",
+        xaxis_tickangle=-45,
+        barmode="stack",
+        legend_title_text="Protocol",
+        margin=dict(t=50, r=20, l=10, b=40)
+    )
     st.plotly_chart(fig_bar, use_container_width=True)

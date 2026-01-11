@@ -50,12 +50,14 @@ if selected_chain != "All":
 # -----------------------------
 
 
-st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=110)  
-st.markdown("**My Name Is Bella**")
-st.caption("🧬 Blockchain Research Analyst")
-st.markdown("**Get in touch: 👇🏼**")
+with st.sidebar:
+    st.markdown("---")
+    st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=100)  
+    st.markdown("**My Name Is Bella**")
+    st.caption("🧬 Blockchain Research Analyst")
+    st.markdown("**Get in touch: 👇🏼**")
 
-c1, c2 = st.columns(2)
+    c1, c2 = st.columns(2)
     with c1:
         st.link_button("Portfolio", "https://bellabahrami.carrd.co/")
     with c2:
@@ -63,7 +65,6 @@ c1, c2 = st.columns(2)
 
     st.link_button("x.com", "https://x.com/Bella52496")
     st.markdown("---")
-
 
 
 # -----------------------------

@@ -25,21 +25,26 @@ st.title("🧮 DeFi Lending Protocol Dashboard")
 # -----------------------------
 # Dashboard Header
 # -----------------------------
+
 st.markdown("""
 <div style="
-    background-color: #111111;
+    background-color: #111;
     padding: 20px 25px;
     border-radius: 10px;
     border: 1px solid #333;
     color: white;
 ">
-    <h4 style='margin-bottom: 5px;'>📌 Overview</h4>
-    <p style='color: #b0b0b0; margin-top: 0;'> This dashboard gives a clear snapshot of the DeFi lending market. <li>
-    <li> It shows where liquidity is concentrated, how it changes over time, and which assets offer yield. <li>
-    <li> Use the time and chain filters to focus on specific markets or periods. <li>
-     <li> You can filter by chain and select a time period (last 3, 6, or 12 months).</p>
+  <h4 style="margin-bottom: 10px;">📌 Overview</h4>
+
+  <ul style="color: #b0b0b0; margin-top: 0; padding-left: 20px;">
+    <li>This dashboard gives a clear snapshot of the DeFi lending market.</li>
+    <li>It shows where liquidity is concentrated, how it changes over time, and which assets offer yield.</li>
+    <li>Use the time and chain filters to focus on specific markets or periods.</li>
+    <li>You can filter by chain and select a time period (last 3, 6, or 12 months).</li>
+  </ul>
 </div>
 """, unsafe_allow_html=True)
+
 
 # -----------------------------
 # Sidebar Filters

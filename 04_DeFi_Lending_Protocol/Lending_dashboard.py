@@ -321,7 +321,7 @@ df_apy = df_apy.rename(columns={
     "project": "Protocol",
     "tvlUsd": "Total TVL ($)",
     "apy": "APY BASE",
-    "apyMean30d": "APY 30D AVG"
+    "apyMean30d": "APY 30 Days Avg"
 })
 
 # Style color based on positive/negative
@@ -336,7 +336,7 @@ df_apy_view = df_apy[["Protocol", "chain", "symbol", "Total TVL ($)", "APY BASE"
 
 df_apy_styled = (
     df_apy_view.style
-    .applymap(color_apy, subset=["APY BASE", "APY 30D AVG"])
+    .applymap(color_apy, subset=["APY BASE", "APY 30 Days Avg"])
     .format({
         "Total TVL ($)": "${:,.0f}",
         "APY BASE": "{:.2%}",

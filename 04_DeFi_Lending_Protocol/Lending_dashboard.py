@@ -112,6 +112,7 @@ with col2:
         x="symbol",
         y="tvlUsd",
         color="project",
+        color_discrete_map=color_map,
         labels={"tvlUsd": "TVL (USD)", "symbol": "Token", "project": "Protocol"},
         title="TVL Distribution by Token",
     )

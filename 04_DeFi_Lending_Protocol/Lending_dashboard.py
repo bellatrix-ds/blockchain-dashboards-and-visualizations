@@ -50,7 +50,7 @@ if selected_chain != "All":
 # -----------------------------
 with st.sidebar:
     st.markdown("---")
-    st.image("https://github.com/bellatrix-ds/blockchain-dashboards-and-visualizations/blob/main/04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=110)  
+    st.image("04_DeFi_Lending_Protocol/JGqdjaIW_400x400.jpg", width=110)  
     st.markdown("**Bella**")
     st.caption("Blockchain Research Analyst")
 

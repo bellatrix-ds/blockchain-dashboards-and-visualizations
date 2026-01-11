@@ -58,21 +58,16 @@ if selected_chain != "All":
 # -----------------------------
 # KPI Section
 # -----------------------------
+st.subheader("📊 Lending TVL KPIs")
 
-st.markdown("""
-<hr style="border-top: 1px solid black; margin-bottom: 10px;">
-<h4 style="text-align: center; color: white; margin: 0;">📊 Lending TVL KPIs</h4>
-""", unsafe_allow_html=True)
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-# --- KPI data (same logic as yours) ---
 kpi_df = df_filtered[df_filtered['metric_type'] == 'tvl'].copy()
 kpi_df['protocol'] = kpi_df['protocol'].astype(str).str.strip()
 tvl_sum = kpi_df.groupby('protocol')['totalLiquidityUSD'].sum()
 
 protocols = ["Aave", "Compound", "Morpho", "SparkLend"]
 
-# --- KPI cards style (add once) ---
 st.markdown("""
 <style>
 .kpi-grid {
@@ -94,7 +89,7 @@ st.markdown("""
   margin: 0 0 10px 0;
 }
 .kpi-value {
-  font-size: 42px;
+  font-size: 34px;
   font-weight: 800;
   color: white;
   margin: 0;
@@ -109,20 +104,21 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- Render KPI cards (replaces st.columns + st.metric) ---
-cards_html = '<div class="kpi-grid">'
+cards = '<div class="kpi-grid">'
 for protocol in protocols:
     value = float(tvl_sum.get(protocol, 0.0))
-    cards_html += f"""
+    cards += f"""
       <div class="kpi-card">
         <p class="kpi-title">{protocol} TVL</p>
         <p class="kpi-value">${value/1e12:.2f} T</p>
       </div>
     """
-cards_html += "</div>"
+cards += "</div>"
 
-st.markdown(cards_html, unsafe_allow_html=True)
+st.markdown(cards, unsafe_allow_html=True)
 
+
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
 # -----------------------------
 # Section: Protocol TVL Overview

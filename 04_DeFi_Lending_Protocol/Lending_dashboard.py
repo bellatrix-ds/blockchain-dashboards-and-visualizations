@@ -22,9 +22,9 @@ df_yield = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchai
 # -----------------------------
 # Title & Description
 # -----------------------------
+st.set_page_config(layout="wide")
+
 st.title("📊 DeFi Lending Protocol Dashboard")
-
-
 
 st.markdown("""
 <div style="

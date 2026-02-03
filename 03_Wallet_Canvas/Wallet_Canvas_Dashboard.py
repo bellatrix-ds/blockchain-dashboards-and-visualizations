@@ -7,7 +7,7 @@ from datetime import datetime
 
 df = pd.read_csv('https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/03_Wallet_Canvas/01%2602_df.csv',on_bad_lines='skip')
 
-st.title("📊 ETH Wallet Insights & Patterns")
+st.title("📊 Ethereum Wallet Insights & Patterns")
 
 # Wallet selector
 wallet = st.selectbox("🔎 Select a Wallet Address", df['wallet_address'])

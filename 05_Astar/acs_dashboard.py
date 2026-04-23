@@ -347,15 +347,14 @@ st.markdown(f"""
 
 
 # ── LOAD DATA ─────────────────────────────────────────────────────────────────
-df_tvl       = load_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/tvl_trajectory.csv")
-df_seasons   = load_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/season_metrics.csv")
-df_protocols = load_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/protocol_tvl.csv")
-df_bridge    = load_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/astr_bridge.csv")
-df_gas       = load_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/gas_per_tx.csv")
-df_assets    = load_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/asset_retention.csv")
-df_gaming    = load_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/gaming_defi_retention.csv")
-df_l2        = load_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/l2_benchmark.csv")
-
+df_tvl       = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/tvl_trajectory.csv")
+df_seasons   = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/season_metrics.csv")
+df_protocols = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/protocol_tvl.csv")
+df_bridge    = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/astr_bridge.csv")
+df_gas       = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/gas_per_tx.csv")
+df_assets    = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/asset_retention.csv")
+df_gaming    = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/gaming_defi_retention.csv")
+df_l2        = pd.read_csv("https://raw.githubusercontent.com/bellatrix-ds/blockchain-dashboards-and-visualizations/refs/heads/main/05_Astar/data/l2_benchmark.csv")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # HEADER

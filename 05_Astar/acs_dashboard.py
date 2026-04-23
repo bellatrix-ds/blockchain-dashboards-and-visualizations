@@ -455,7 +455,7 @@ fig_tvl.add_trace(go.Scatter(
                 mode="lines",
             ))
             # Annotation
-            fig_tvl.add_annotation(
+        fig_tvl.add_annotation(
                 x="S9", y=220, text="Peak $226M", showarrow=True,
                 arrowhead=2, arrowcolor=PINK, font=dict(color=PINK, size=10),
                 ax=30, ay=-30,

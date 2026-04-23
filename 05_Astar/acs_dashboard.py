@@ -441,15 +441,15 @@ with st.container():
             x_acs = df_tvl.loc[acs_mask, "period"].tolist()
             y_acs = df_tvl.loc[acs_mask, "tvl_usd_m"].tolist()
             fig_tvl.add_trace(go.Scatter(
-                x=x_acs, y=y_acs, fill="tozeroy",
-                fillcolor=f"{BLUE}18", line=dict(color=f"{BLUE}55", width=1, dash="dot"),
-                name="ACS period", hoverinfo="skip",
+    x=x_acs, y=y_acs, fill="tozeroy",
+    fillcolor="rgba(0, 180, 255, 0.09)", line=dict(color="rgba(0, 180, 255, 0.33)", width=1, dash="dot"),
+    name="ACS period", hoverinfo="skip",
             ))
             # Main TVL line
-            fig_tvl.add_trace(go.Scatter(
-                x=x_all, y=y_all, fill="tozeroy",
-                fillcolor=f"{PINK}14",
-                line=dict(color=PINK, width=2.5),
+fig_tvl.add_trace(go.Scatter(
+    x=x_all, y=y_all, fill="tozeroy",
+    fillcolor=f"{PINK}14",
+    line=dict(color=PINK, width=2.5),
                 name="Total TVL ($M)",
                 hovertemplate="<b>%{x}</b><br>TVL: $%{y:.0f}M<extra></extra>",
                 mode="lines",

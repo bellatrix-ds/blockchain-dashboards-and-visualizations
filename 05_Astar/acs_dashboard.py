@@ -437,16 +437,16 @@ with st.container():
             x_all = df_tvl["period"].tolist()
             y_all = df_tvl["tvl_usd_m"].tolist()
             # ACS shaded region
-                x_acs = df_tvl.loc[acs_mask, "period"].tolist()
-                y_acs = df_tvl.loc[acs_mask, "tvl_usd_m"].tolist()
-                fig_tvl.add_trace(go.Scatter(
+            x_acs = df_tvl.loc[acs_mask, "period"].tolist()
+            y_acs = df_tvl.loc[acs_mask, "tvl_usd_m"].tolist()
+            fig_tvl.add_trace(go.Scatter(
                     x=x_acs, y=y_acs, fill="tozeroy",
                     fillcolor="rgba(0, 180, 255, 0.09)",
                     line=dict(color="rgba(0, 180, 255, 0.33)", width=1, dash="dot"),
                     name="ACS period", hoverinfo="skip",
                 ))
                 # Main TVL line
-                fig_tvl.add_trace(go.Scatter(
+            fig_tvl.add_trace(go.Scatter(
                     x=x_all, y=y_all, fill="tozeroy",
                     fillcolor="rgba(232, 25, 139, 0.08)",
                     line=dict(color=PINK, width=2.5),
@@ -455,12 +455,12 @@ with st.container():
                     mode="lines",
                 ))
                 # Annotation
-                fig_tvl.add_annotation(
+            fig_tvl.add_annotation(
                     x="S9", y=220, text="Peak $226M", showarrow=True,
                     arrowhead=2, arrowcolor=PINK, font=dict(color=PINK, size=10),
                     ax=30, ay=-30,
                 )
-                fig_tvl.add_annotation(
+            fig_tvl.add_annotation(
                     x="Apr'26", y=9.5, text="$9.5M", showarrow=False,
                     font=dict(color=RED, size=10), xanchor="right",
                 )

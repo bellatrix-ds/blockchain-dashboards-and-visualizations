@@ -436,8 +436,6 @@ with st.container():
             acs_mask = df_tvl["acs_active"] == 1
             x_all = df_tvl["period"].tolist()
             y_all = df_tvl["tvl_usd_m"].tolist()
-
-            # ACS shaded region
             # ACS shaded region
                 x_acs = df_tvl.loc[acs_mask, "period"].tolist()
                 y_acs = df_tvl.loc[acs_mask, "tvl_usd_m"].tolist()

@@ -7,6 +7,7 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import requests
 from io import StringIO
+import os
 
 # ── PAGE CONFIG ──────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -35,28 +36,51 @@ CHART_BG     = BG_DARK
 GRID_COLOR   = "#1e1e30"
 FONT_FAMILY  = "Inter, Arial, sans-serif"
 
-# ── GITHUB CSV BASE ───────────────────────────────────────────────────────────
-# Update this to your GitHub raw content URL base
-GITHUB_RAW_BASE = (
-    "https://github.com/bellatrix-ds/blockchain-dashboards-and-visualizations/tree/main/05_Astar/data"
-)
+# ── DATA SOURCE CONFIG ────────────────────────────────────────────────────────
+# Priority order:
+#   1. Local  → a "data/" folder sitting next to acs_dashboard.py
+#   2. GitHub → set GITHUB_RAW_BASE to your repo's raw URL (optional)
+#   3. Bundled sample data → always works as a last resort
+
+GITHUB_RAW_BASE = "https://github.com/bellatrix-ds/blockchain-dashboards-and-visualizations/tree/main/05_Astar/data"   # e.g. "https://raw.githubusercontent.com/you/repo/main/data/"
+                        # Leave empty ("") to skip GitHub and use local files only.
+
+# Path to local data folder (relative to this script)
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
 # ── HELPERS ───────────────────────────────────────────────────────────────────
 
 @st.cache_data(ttl=3600)
 def load_csv(filename: str) -> pd.DataFrame:
-    """Load a CSV from GitHub raw URL. Falls back to bundled sample data."""
-    url = GITHUB_RAW_BASE + filename
-    try:
-        r = requests.get(url, timeout=10)
-        r.raise_for_status()
-        return pd.read_csv(StringIO(r.text))
-    except Exception:
-        st.warning(
-            f"Could not load `{filename}` from GitHub — using sample data. "
-            f"Update GITHUB_RAW_BASE and ensure `{filename}` exists in your repo."
-        )
-        return _sample_data(filename)
+    """
+    Load a CSV with three fallback levels:
+      1. Local  data/ folder next to this script
+      2. GitHub raw URL (if GITHUB_RAW_BASE is set)
+      3. Bundled sample data
+    """
+    # --- 1. Try local file first ---
+    local_path = os.path.join(DATA_DIR, filename)
+    if os.path.exists(local_path):
+        return pd.read_csv(local_path)
+
+    # --- 2. Try GitHub if URL is configured ---
+    if GITHUB_RAW_BASE and "YOUR_USERNAME" not in GITHUB_RAW_BASE:
+        url = GITHUB_RAW_BASE.rstrip("/") + "/" + filename
+        try:
+            r = requests.get(url, timeout=10)
+            r.raise_for_status()
+            return pd.read_csv(StringIO(r.text))
+        except Exception:
+            pass  # fall through to sample data
+
+    # --- 3. Fall back to bundled sample data ---
+    st.warning(
+        f"**`{filename}` not found.** "
+        f"Place your CSV files in a `data/` folder next to `acs_dashboard.py` and rerun. "
+        f"Using sample data for now.",
+        icon="⚠️",
+    )
+    return _sample_data(filename)
 
 
 def _sample_data(filename: str) -> pd.DataFrame:

@@ -1,13 +1,4 @@
-"""
-ACS Campaign Post-Mortem Dashboard — Soneium Ecosystem
-Streamlit app with ACS brand kit (dark bg, hot-pink + electric-blue palette)
 
-Usage:
-    pip install streamlit plotly pandas requests
-    streamlit run acs_dashboard.py
-
-CSV data is loaded from GitHub. Update GITHUB_RAW_BASE to point to your repo.
-"""
 
 import streamlit as st
 import pandas as pd
@@ -47,7 +38,7 @@ FONT_FAMILY  = "Inter, Arial, sans-serif"
 # ── GITHUB CSV BASE ───────────────────────────────────────────────────────────
 # Update this to your GitHub raw content URL base
 GITHUB_RAW_BASE = (
-    "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/data/"
+    "https://github.com/bellatrix-ds/blockchain-dashboards-and-visualizations/tree/main/05_Astar/data"
 )
 
 # ── HELPERS ───────────────────────────────────────────────────────────────────

@@ -363,7 +363,7 @@ st.markdown(f"""
 <div class="acs-header">
   <div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:12px;">
     <div>
-      <div class="acs-title">ACS Campaign Post-Mortem &mdash; Soneium Ecosystem</div>
+      <div class="acs-title">ACS Campaign Performance Report: Soneium Ecosystem </div>
       <div class="acs-sub">Feb 20 &ndash; May 30 2025 campaign &nbsp;&middot;&nbsp; Analysis as of April 2026 &nbsp;&middot;&nbsp; 80.3M ASTR distributed</div>
     </div>
     <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap; padding-top:4px;">

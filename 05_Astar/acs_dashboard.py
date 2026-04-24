@@ -345,20 +345,36 @@ st.markdown(f"""
 
 # ── HELPER: section header ────────────────────────────────────────────────────
 def section_header(anchor_id, eyebrow, heading, body=None):
-    body_html = f'<div style="font-family:{FONT_BODY};font-size:15px;color:{MUTED};line-height:1.75;max-width:760px;margin:0 auto 36px;">{body}</div>' if body else ""
+    body_html = f"""
+    <div style="font-family:{FONT_BODY};font-size:15px;color:{MUTED};
+                line-height:1.75;max-width:760px;margin:0 auto 36px;
+                text-align:center;">
+        {body}
+    </div>""" if body else ""
+
     st.markdown(f"""
-    <div id="{anchor_id}" style="text-align:center;padding:60px 64px 8px;">
-      <div style="font-family:{FONT_BODY};font-size:11px;font-weight:700;text-transform:uppercase;
-                  letter-spacing:0.14em;color:{BLUE};margin-bottom:10px;">{eyebrow}</div>
-      <div style="font-family:{FONT_DISPLAY};font-size:30px;font-weight:800;color:{WHITE};
-                  line-height:1.25;margin-bottom:14px;">{heading}</div>
+    <div id="{anchor_id}" style="width:100%;text-align:center;padding:60px 0 8px;">
+      <div style="font-family:{FONT_BODY};font-size:11px;font-weight:700;
+                  text-transform:uppercase;letter-spacing:0.14em;
+                  color:{BLUE};margin-bottom:10px;text-align:center;">
+        {eyebrow}
+      </div>
+      <div style="font-family:{FONT_DISPLAY};font-size:30px;font-weight:800;
+                  color:{WHITE};line-height:1.25;margin-bottom:14px;
+                  text-align:center;width:100%;">
+        {heading}
+      </div>
       {body_html}
     </div>
     """, unsafe_allow_html=True)
 
-def gray_divider():
-    st.markdown(f'<hr style="border:none;border-top:1px solid {DIVIDER};margin:0;">', unsafe_allow_html=True)
 
+def gray_divider():
+    st.markdown(f"""
+    <div style="width:100%;padding:0;">
+      <hr style="border:none;border-top:1px solid {DIVIDER};margin:0;width:100%;">
+    </div>
+    """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 1 — CAMPAIGN SUMMARY

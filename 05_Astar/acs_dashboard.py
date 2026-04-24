@@ -383,7 +383,7 @@ with st.container():
         with col:
             st.markdown(f"""<div class="card">
               <div class="kpi-label">{label}</div>
-              <div class="kpi-number" style="color:{color};">{val}</div>
+              <div style="font-family:{FONT_DISPLAY};font-size:26px;font-weight:700;color:{color};margin-bottom:6px;">{val}</div>
               <div class="kpi-sub">{sub}</div>
             </div>""", unsafe_allow_html=True)
 

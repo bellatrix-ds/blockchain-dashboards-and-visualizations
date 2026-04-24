@@ -405,29 +405,6 @@ with st.container():
 
     st.markdown("<div style='height:48px'></div>", unsafe_allow_html=True)
 
-    # Three verdicts
-    st.markdown(f"""<div style="text-align:center;margin-bottom:24px;">
-      <div style="font-family:{FONT_DISPLAY};font-size:22px;font-weight:700;color:{WHITE};">Three Verdicts</div>
-    </div>""", unsafe_allow_html=True)
-
-    v1, v2, v3 = st.columns(3)
-    for col, color, icon, title, body in [
-        (v1, RED,   "❌", "ACS did not establish ASTR utility",
-         "ASTR usage collapsed post-rewards. Bridge outflows of 23% within 30 days of the claim date confirm wallets treated ASTR purely as a reward vehicle, not a utility asset."),
-        (v2, AMBER, "⚠️", "Gaming showed promise, DeFi did not",
-         "Yoki Legacy retained 13% of users, 7x Kyo Finance's 1.8%. Gaming mechanics create habit; DeFi farming creates mercenaries. The next campaign should weight gaming 3x over DeFi."),
-        (v3, BLUE,  "→",  "The real opportunity is the organic floor",
-         "19 wallets were still actively using Kyo Finance in April 2026 with no incentives. Understanding who they are and why they stayed is worth more than any campaign headline."),
-    ]:
-        with col:
-            st.markdown(f"""<div class="card" style="border-top:3px solid {color};">
-              <div style="font-size:28px;margin-bottom:14px;">{icon}</div>
-              <div style="font-family:{FONT_DISPLAY};font-size:17px;font-weight:700;color:{WHITE};margin-bottom:12px;line-height:1.4;">{title}</div>
-              <div style="font-family:{FONT_BODY};font-size:13px;color:{MUTED};line-height:1.7;">{body}</div>
-            </div>""", unsafe_allow_html=True)
-
-    st.markdown("<div style='height:60px'></div>", unsafe_allow_html=True)
-
 gray_divider()
 
 # ══════════════════════════════════════════════════════════════════════════════

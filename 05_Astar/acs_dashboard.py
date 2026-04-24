@@ -561,7 +561,7 @@ with st.container():
                 width=0.6,
             ))
             # Reward-rate reference line
-            fig_br.add_hline(y=10, line_dash="dot", line_color=f"{PINK}66", line_width=1,
+            fig_br.add_hline(y=10, line_dash="dot", line_color="rgba(232, 25, 139, 0.4)", line_width=1,
                              annotation_text="reward rate", annotation_font=dict(size=8, color=PINK),
                              annotation_position="right")
             brand_chart_layout(fig_br, height=240)

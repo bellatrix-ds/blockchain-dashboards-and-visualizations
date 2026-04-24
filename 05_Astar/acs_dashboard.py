@@ -6,12 +6,9 @@ from io import StringIO
 import os
 
 # ── PAGE CONFIG ───────────────────────────────────────────────────────────────
-st.set_page_config(
-    page_title="ACS Campaign Performance Report: Soneium Ecosystem",
-    page_icon="📊",
-    layout="wide",
-    initial_sidebar_state="collapsed",
-)
+st.set_page_config(layout="wide",page_icon="📊",initial_sidebar_state="collapsed")
+st.title("ACS Campaign Performance Report: Soneium Ecosystem")
+st.subheader("Astar Network · Post-Mortem Analysis")
 
 # ── PALETTE ───────────────────────────────────────────────────────────────────
 BG       = "#0a0a0f"

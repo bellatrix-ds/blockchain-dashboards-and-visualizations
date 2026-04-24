@@ -583,7 +583,7 @@ with st.container():
                 line=dict(color=AMBER, width=2.5),
                 marker=dict(color=pt_colors, size=[12 if i == 3 else 7 for i in range(len(df_gas))],
                             line=dict(color=BG_DARK, width=1.5)),
-                fill="tozeroy", fillcolor=f"{AMBER}12",
+                fill="tozeroy", fillcolor="rgba(245, 158, 11, 0.07)",
                 hovertemplate="<b>%{x}</b><br>Gas/tx: %{y:.0f}K<extra></extra>",
             ))
             fig_gas.add_annotation(

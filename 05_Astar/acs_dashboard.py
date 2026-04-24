@@ -301,10 +301,10 @@ with st.sidebar:
       <div style="font-family:{FONT_BODY};font-size:13px;color:{MUTED};margin-bottom:24px;line-height:1.5;">Blockchain Research Analyst</div>
       <div style="font-family:{FONT_BODY};font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:{MUTED};margin-bottom:14px;">Get in touch</div>
       <a href="https://bellabahrami.carrd.co/" target="_blank" style="{btn}">🌐 &nbsp;Portfolio</a>
-      <a href="https://medium.com/@bellabahramii/the-art-of-spending-12m-and-getting-nothing-back-31d8d5ed57ef?postPublishedType=repub"  target="_blank" style="{btn}">✨ &nbsp;Medium</a>
+      <a href="https://medium.com/@bellabahramii/the-art-of-spending-12m-and-getting-nothing-back-31d8d5ed57ef?postPublishedType=repub"  target="_blank" style="{btn}">✨ &nbsp;My Article about Astar</a>
       <a href="https://x.com/Bella52496"         target="_blank" style="{btn}">𝕏 &nbsp;x.com</a>
-      <a href="https://t.me/bella_trickss"       target="_blank" style="{btn}">✈️ &nbsp;Telegram</a>
-      <a href="mailto:bellabahramii@gmail.com"               style="{btn}">✉️ &nbsp;Email</a>
+      <a href="https://t.me/bella_trickss"       target="_blank" style="{btn}">💎 &nbsp;Telegram</a>
+      <a href="mailto:bellabahramii@gmail.com"               style="{btn}">📩 &nbsp;Email</a>
       <div style="font-family:{FONT_BODY};font-size:10px;color:{BORDER};line-height:1.8;margin-top:20px;">
         Analysis as of April 2026<br>
         Data: DeFiLlama, Blockscout, Astar Forum

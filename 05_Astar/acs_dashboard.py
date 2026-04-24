@@ -323,7 +323,7 @@ else:
 st.markdown(f"""
 <div style="background:{SURFACE};border-bottom:1px solid {BORDER};padding:36px 64px 28px;">
   <div style="text-align:center;">
-    <div style="display:inline-flex;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:14px;">
       {logo_html}
       <div style="font-family:{FONT_DISPLAY};font-size:34px;font-weight:800;color:{WHITE};line-height:1.2;">
         ACS Campaign Performance Report
